@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 import PageLayout from '~/layouts/PageLayout.astro';
 import ArticleCard from '~/components/ArticleCard.astro';
 import SecurityTools from '~/components/SecurityTools.astro';
-import { getArticles, getSection, localizedCopy, resourceGroups, sectionOrder } from '~/data/hexacyber';
+import { contactEmail, contactMailto, getArticles, getSection, legalPages, localizedCopy, resourceGroups, sectionOrder } from '~/data/hexacybert';
 import { assetPath, langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
 
 export const getStaticPaths = () => langCodes.map((lang) => ({ params: { lang } }));
@@ -16,11 +16,12 @@ const featured = ['what-is-cybersecurity', 'digital-privacy-basics', 'bitwarden'
   .map((slug) => articles.find((article) => article.slug === slug))
   .filter(Boolean);
 const metadata = {
-  title: `HexaCyber - ${copy.heroTitle}`,
+  title: `HexaCybert - ${copy.heroTitle}`,
   ignoreTitleTemplate: true,
   description: copy.description,
 };
-const logoSrc = assetPath('/branding/hexacyber-logo-horizontal-dark.svg');
+const logoSrc = assetPath('/branding/hexacybert-logo-horizontal-dark.svg');
+const legalLang = (['en', 'fr', 'es'].includes(lang) ? lang : 'en') as 'en' | 'fr' | 'es';
 ---
 
 <PageLayout metadata={metadata} lang={lang}>
@@ -28,7 +29,7 @@ const logoSrc = assetPath('/branding/hexacyber-logo-horizontal-dark.svg');
     <div class="absolute inset-0 opacity-90" style="background: radial-gradient(circle at 80% 8%, rgb(36 200 117 / .16), transparent 26rem), linear-gradient(140deg, var(--hc-bg), var(--hc-bg-soft) 58%, #11130f)"></div>
     <div class="hc-shell relative grid gap-10 py-16 lg:grid-cols-[1fr_.9fr] lg:items-center lg:py-20">
       <div>
-        <img class="mb-8 h-16 w-auto" src={logoSrc} alt="HexaCyber" />
+        <img class="mb-8 h-16 w-auto" src={logoSrc} alt="HexaCybert" />
         <p class="hc-eyebrow">{copy.description}</p>
         <h1 class="mt-4 max-w-4xl text-5xl font-black sm:text-6xl lg:text-7xl">{copy.heroTitle}</h1>
         <p class="mt-6 max-w-2xl text-xl leading-9 hc-muted">{copy.heroText}</p>
@@ -111,15 +112,22 @@ const logoSrc = assetPath('/branding/hexacyber-logo-horizontal-dark.svg');
   </section>
 
   <section class="hc-shell hc-section">
-    <form class="hc-card p-6 md:flex md:items-center md:justify-between md:gap-8">
+    <div class="hc-card p-6 md:flex md:items-center md:justify-between md:gap-8">
       <div>
-        <h2 class="text-2xl font-black">{copy.newsletterTitle}</h2>
-        <p class="mt-2 max-w-2xl text-base leading-7 hc-muted">{copy.newsletterText}</p>
+        <h2 class="text-2xl font-black">{legalPages['editorial-policy'].title[legalLang]}</h2>
+        <p class="mt-2 max-w-2xl text-base leading-7 hc-muted">
+          {lang === 'es'
+            ? 'Contenido neutral, sin pruebas inventadas, premios falsos ni promesas de seguridad sin respaldo.'
+            : lang === 'fr'
+              ? 'Contenu neutre, sans tests inventes, faux prix ni promesses de securite non etayees.'
+              : 'Neutral content without invented tests, fake awards or unsupported security promises.'}
+        </p>
       </div>
-      <div class="mt-5 flex gap-2 md:mt-0">
-        <input class="hc-input min-w-0" type="email" required placeholder={copy.emailPlaceholder} />
-        <button class="hc-button" type="submit">{copy.subscribe}</button>
+      <div class="mt-5 flex flex-wrap gap-2 md:mt-0">
+        <a class="hc-button" href={localizePath('/methodology', lang)}>{legalPages.methodology.title[legalLang]}</a>
+        <a class="hc-button hc-button-secondary" href={localizePath('/affiliate-disclosure', lang)}>{legalPages['affiliate-disclosure'].title[legalLang]}</a>
+        <a class="hc-button hc-button-secondary" href={contactMailto}>{contactEmail}</a>
       </div>
-    </form>
+    </div>
   </section>
 </PageLayout>

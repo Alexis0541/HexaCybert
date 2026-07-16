@@ -1,7 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
-import { getSection, sectionOrder } from '~/data/hexacyber';
+import { contactEmail, contactMailto, getSection, legalPages, sectionOrder } from '~/data/hexacybert';
 import type { Lang } from '~/utils/i18n';
 import { languages, localizePath, ui } from '~/utils/i18n';
 
@@ -11,7 +10,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const year = new Date().getFullYear();
+const year = 2026;
+const legalLang = (['en', 'fr', 'es'].includes(lang) ? lang : 'en') as 'en' | 'fr' | 'es';
 ---
 
 <footer class="border-t" style="border-color: var(--hc-border); background: var(--hc-bg)">
@@ -19,13 +19,7 @@ const year = new Date().getFullYear();
     <div>
       <Logo />
       <p class="mt-4 max-w-sm text-base leading-7 hc-muted">{t.footerDescription}</p>
-      <div class="mt-5 flex gap-2">
-        {['tabler:brand-x', 'tabler:brand-linkedin', 'tabler:rss'].map((icon) => (
-          <a class="rounded border p-2 hc-muted hover:text-[var(--hc-accent)]" style="border-color: var(--hc-border)" href="#" aria-label={icon}>
-            <Icon name={icon} class="h-5 w-5" />
-          </a>
-        ))}
-      </div>
+      <p class="mt-4 text-sm hc-muted"><a class="hover:text-[var(--hc-accent)]" href={contactMailto}>{contactEmail}</a></p>
     </div>
     <div class="grid gap-8 sm:grid-cols-3">
       <div>
@@ -46,13 +40,17 @@ const year = new Date().getFullYear();
           <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/privacy-policy', lang)}>{t.legalPrivacy}</a></li>
           <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/cookies', lang)}>{t.legalCookies}</a></li>
           <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/terms', lang)}>{t.legalTerms}</a></li>
-          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/methodology', lang)}>{t.legalMethodology}</a></li>
+          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/legal-notice', lang)}>{legalPages['legal-notice'].title[legalLang]}</a></li>
+          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/affiliate-disclosure', lang)}>{legalPages['affiliate-disclosure'].title[legalLang]}</a></li>
+          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/editorial-policy', lang)}>{legalPages['editorial-policy'].title[legalLang]}</a></li>
+          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/corrections-policy', lang)}>{legalPages['corrections-policy'].title[legalLang]}</a></li>
+          <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/methodology', lang)}>{legalPages.methodology.title[legalLang]}</a></li>
           <li><a class="hover:text-[var(--hc-accent)]" href={localizePath('/contact', lang)}>{t.navContact}</a></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="border-t px-4 py-5 text-center text-sm hc-muted" style="border-color: var(--hc-border)">
-    Copyright {year} HexaCyber. {t.copyright}
+    Copyright {year} HexaCybert. {t.copyright}
   </div>
 </footer>

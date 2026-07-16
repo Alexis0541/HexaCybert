@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 import PageLayout from '~/layouts/PageLayout.astro';
 import ArticleCard from '~/components/ArticleCard.astro';
 import SecurityTools from '~/components/SecurityTools.astro';
-import { getArticles, getSection, legalPages, resourceGroups, sectionOrder, type SectionKey } from '~/data/hexacyber';
+import { adminCountry, contactEmail, contactMailto, getArticles, getSection, legalPages, resourceGroups, sectionOrder, type SectionKey } from '~/data/hexacybert';
 import { langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
 
 export const getStaticPaths = () =>
@@ -18,19 +18,12 @@ const articles = getArticles(lang);
 const isSection = sectionOrder.includes(slug as SectionKey);
 const section = isSection ? getSection(lang, slug as SectionKey) : undefined;
 const legal = legalPages[slug as keyof typeof legalPages];
-const localizedLegalTitle = legal
-  ? slug === 'privacy-policy'
-    ? t.legalPrivacy
-    : slug === 'cookies'
-      ? t.legalCookies
-      : slug === 'terms'
-        ? t.legalTerms
-        : t.legalMethodology
-  : undefined;
+const legalLang = (['en', 'fr', 'es'].includes(lang) ? lang : 'en') as 'en' | 'fr' | 'es';
+const localizedLegalTitle = legal?.title[legalLang];
 const title = section?.title ?? localizedLegalTitle ?? (slug === 'about' ? t.aboutTitle : slug === 'contact' ? t.contactTitle : t.searchTitle);
 const description =
   section?.description ??
-  legal?.description ??
+  legal?.description[legalLang] ??
   (slug === 'about'
     ? t.aboutDescription
     : slug === 'contact'
@@ -44,6 +37,29 @@ const filtered = isSection
       : articles.filter((article) => article.category === slug)
   : articles;
 const levels = ['Beginner', 'Intermediate', 'Advanced'] as const;
+const searchItems = articles.map((article) => ({ ...article, url: localizePath(`/articles/${article.slug}`, lang) }));
+const aboutBlocks = {
+  en: [
+    'HexaCybert publishes practical cybersecurity, privacy, VPN, antivirus, password manager and device security guidance for everyday readers.',
+    'The site is administered from France and is built around cautious editorial rules: no invented tests, no fake awards, no unsupported anonymity promises and no hidden affiliate pressure.',
+    'When we compare tools, we explain trade-offs such as trust model, recovery, compatibility, cost, usability and privacy limits. Security advice is written as a baseline that readers can adapt to their own risk level.',
+  ],
+  fr: [
+    'HexaCybert publie des guides pratiques sur la cybersecurite, la confidentialite, les VPN, les antivirus, les gestionnaires de mots de passe et la protection des appareils.',
+    'Le site est administre depuis la France et suit des regles editoriales prudentes : pas de tests inventes, pas de faux prix, pas de promesses d anonymat non verifiees et pas de pression affiliee cachee.',
+    'Dans les comparatifs, nous expliquons les compromis : modele de confiance, recuperation, compatibilite, cout, facilite d usage et limites de confidentialite.',
+  ],
+  es: [
+    'HexaCybert publica guias practicas sobre ciberseguridad, privacidad, VPN, antivirus, gestores de contrasenas y proteccion de dispositivos.',
+    'El sitio se administra desde Francia y sigue reglas editoriales prudentes: sin pruebas inventadas, sin premios falsos, sin promesas de anonimato sin respaldo y sin presion de afiliados oculta.',
+    'En las comparativas explicamos ventajas y limites: modelo de confianza, recuperacion, compatibilidad, coste, facilidad de uso y limites de privacidad.',
+  ],
+} as const;
+const contactBlocks = {
+  en: ['For editorial questions, corrections, privacy requests or security resource suggestions, contact HexaCybert by email.', `Administration country: ${adminCountry.en}.`],
+  fr: ['Pour les questions editoriales, corrections, demandes de confidentialite ou suggestions de ressources, contactez HexaCybert par email.', `Pays d administration : ${adminCountry.fr}.`],
+  es: ['Para preguntas editoriales, correcciones, solicitudes de privacidad o sugerencias de recursos de seguridad, contacta con HexaCybert por correo.', `Pais de administracion: ${adminCountry.es}.`],
+} as const;
 ---
 
 <PageLayout metadata={{ title, description }} lang={lang}>
@@ -134,7 +150,7 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'] as const;
         {articles.slice(0, 24).map((article) => <ArticleCard article={article} lang={lang} />)}
       </div>
     </section>
-    <script define:vars={{ articles, lang }}>
+    <script define:vars={{ articles: searchItems }}>
       const input = document.querySelector('[data-site-search]');
       const results = document.querySelector('[data-search-results]');
       input?.addEventListener('input', () => {
@@ -143,7 +159,7 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'] as const;
         if (results) {
           results.innerHTML = matches
             .slice(0, 50)
-            .map((item) => `<article class="hc-card p-5"><h2 class="text-xl font-black"><a href="/${lang}/articles/${item.slug}">${item.title}</a></h2><p class="mt-2 hc-muted">${item.description}</p></article>`)
+            .map((item) => `<article class="hc-card p-5"><h2 class="text-xl font-black"><a href="${item.url}">${item.title}</a></h2><p class="mt-2 hc-muted">${item.description}</p></article>`)
             .join('');
         }
       });
@@ -153,27 +169,27 @@ const levels = ['Beginner', 'Intermediate', 'Advanced'] as const;
   {slug === 'about' && (
     <section class="hc-shell hc-section">
       <div class="hc-prose max-w-4xl">
-        <p>{t.aboutBody1}</p>
-        <p>{t.aboutBody2}</p>
+        {aboutBlocks[legalLang].map((paragraph) => <p>{paragraph}</p>)}
+        <p><a href={localizePath('/methodology', lang)}>{legalPages.methodology.title[legalLang]}</a> · <a href={localizePath('/editorial-policy', lang)}>{legalPages['editorial-policy'].title[legalLang]}</a> · <a href={localizePath('/corrections-policy', lang)}>{legalPages['corrections-policy'].title[legalLang]}</a></p>
       </div>
     </section>
   )}
 
   {slug === 'contact' && (
     <section class="hc-shell hc-section">
-      <form class="hc-card grid max-w-3xl gap-4 p-6">
-        <input class="hc-input" required placeholder={lang === 'es' ? 'Nombre' : 'Name'} />
-        <input class="hc-input" required type="email" placeholder="Email" />
-        <textarea class="hc-input min-h-36" required placeholder={lang === 'es' ? 'Mensaje' : 'Message'}></textarea>
-        <button class="hc-button" type="submit">{lang === 'es' ? 'Enviar mensaje' : 'Send message'}</button>
-      </form>
+      <div class="hc-card max-w-3xl p-6">
+        <div class="hc-prose">
+          {contactBlocks[legalLang].map((paragraph) => <p>{paragraph}</p>)}
+          <p><a href={contactMailto}>{contactEmail}</a></p>
+        </div>
+      </div>
     </section>
   )}
 
   {legal && (
     <section class="hc-shell hc-section">
       <div class="hc-prose max-w-4xl">
-        {legal.body.map((paragraph) => <p>{paragraph}</p>)}
+        {legal.body[legalLang].map((paragraph) => <p>{paragraph}</p>)}
       </div>
     </section>
   )}

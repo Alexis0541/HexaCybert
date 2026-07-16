@@ -1,6 +1,6 @@
-site:
-  name: HexaCyber
-  site: 'https://hexacyber.example'
+﻿site:
+  name: HexaCybert
+  site: 'https://hexacybert.example'
   base: '/'
   trailingSlash: false
 
@@ -8,22 +8,22 @@ site:
 
 metadata:
   title:
-    default: HexaCyber
-    template: '%s | HexaCyber'
+    default: HexaCybert
+    template: '%s | HexaCybert'
   description: 'Guides, reviews and tools to help you stay secure online.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: HexaCyber
+    site_name: HexaCybert
     images:
       - url: '/branding/og-default.svg'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@hexacyber'
-    site: '@hexacyber'
+    handle: '@hexacybert'
+    site: '@hexacybert'
     cardType: summary_large_image
 
 i18n:

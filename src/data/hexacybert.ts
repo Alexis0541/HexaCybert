@@ -1,4 +1,4 @@
-import type { Lang } from '~/utils/i18n';
+﻿import type { Lang } from '~/utils/i18n';
 
 export type SectionKey =
   | 'cybersecurity'
@@ -63,6 +63,11 @@ export const sourceLibrary = {
   ncscScams: { label: 'NCSC - Spotting cyber attacks', url: 'https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/5-spotting-cyber-attacks' },
   cnilCookies: { label: 'CNIL - Alternatives to third-party cookies and consent', url: 'https://www.cnil.fr/en/alternatives-third-party-cookies-what-consequences-regarding-consent' },
   cnilHome: { label: 'CNIL - Guidelines and recommendations', url: 'https://www.cnil.fr/en' },
+  edpbCookies: { label: 'EDPB - Cookie banner taskforce report', url: 'https://www.edpb.europa.eu/our-work-tools/our-documents/other/report-work-undertaken-cookie-banner-taskforce_en' },
+  ncscVpn: { label: 'NCSC - Virtual Private Networks', url: 'https://www.ncsc.gov.uk/collection/device-security-guidance/infrastructure/virtual-private-networks' },
+  cisaWireless: { label: 'CISA - Securing Wireless Networks', url: 'https://www.cisa.gov/news-events/news/securing-wireless-networks' },
+  cyberCanadaWifi: { label: 'Canadian Centre for Cyber Security - Wi-Fi guidance', url: 'https://www.cyber.gc.ca/en/guidance/protecting-your-organization-while-using-wi-fi-itsap80009' },
+  ietfIkev2: { label: 'IETF RFC 5996 - Internet Key Exchange Protocol Version 2', url: 'https://datatracker.ietf.org/doc/html/rfc5996' },
   bitwarden: { label: 'Bitwarden - Product and help resources', url: 'https://bitwarden.com/' },
   onePassword: { label: '1Password - Features', url: 'https://1password.com/features' },
   dashlane: { label: 'Dashlane - Password manager resources', url: 'https://www.dashlane.com/features/password-manager' },
@@ -74,6 +79,14 @@ export const sourceLibrary = {
   enpass: { label: 'Enpass - Product information', url: 'https://www.enpass.io/' },
 };
 
+export const contactEmail = 'hexacybertprivate@gmail.com';
+export const contactMailto = `mailto:${contactEmail}`;
+export const adminCountry: Record<'en' | 'fr' | 'es', string> = {
+  en: 'France',
+  fr: 'France',
+  es: 'Francia',
+};
+
 export const siteCopy = {
   en: {
     description: 'Guides, reviews and tools to help you stay secure online.',
@@ -81,7 +94,7 @@ export const siteCopy = {
     heroText: 'Independent cybersecurity guidance, privacy explainers and local tools for safer online decisions.',
     primaryCta: 'Start with the security guides',
     secondaryCta: 'Open the privacy center',
-    categoriesTitle: 'Explore HexaCyber',
+    categoriesTitle: 'Explore HexaCybert',
     featuredTitle: 'Recommended reading',
     toolsTitle: 'Free local security tools',
     latestTitle: 'Latest editorial updates',
@@ -96,7 +109,7 @@ export const siteCopy = {
     heroText: 'Conseils independants, explications sur la vie privee et outils locaux pour prendre de meilleures decisions en ligne.',
     primaryCta: 'Commencer par les guides',
     secondaryCta: 'Ouvrir le centre de confidentialite',
-    categoriesTitle: 'Explorer HexaCyber',
+    categoriesTitle: 'Explorer HexaCybert',
     featuredTitle: 'Lectures recommandees',
     toolsTitle: 'Outils de securite locaux',
     latestTitle: 'Dernieres mises a jour',
@@ -111,7 +124,7 @@ export const siteCopy = {
     heroText: 'Unabhangige Orientierung zu Cybersicherheit, Datenschutz und lokalen Tools fur bessere Online-Entscheidungen.',
     primaryCta: 'Mit Sicherheitsleitfaden beginnen',
     secondaryCta: 'Datenschutzzentrum offnen',
-    categoriesTitle: 'HexaCyber entdecken',
+    categoriesTitle: 'HexaCybert entdecken',
     featuredTitle: 'Empfohlene Lekture',
     toolsTitle: 'Kostenlose lokale Sicherheitstools',
     latestTitle: 'Neueste redaktionelle Updates',
@@ -126,7 +139,7 @@ export const siteCopy = {
     heroText: 'Orientacion independiente de ciberseguridad, explicaciones de privacidad y herramientas locales para decidir mejor en linea.',
     primaryCta: 'Empezar con las guias de seguridad',
     secondaryCta: 'Abrir el centro de privacidad',
-    categoriesTitle: 'Explorar HexaCyber',
+    categoriesTitle: 'Explorar HexaCybert',
     featuredTitle: 'Lecturas recomendadas',
     toolsTitle: 'Herramientas locales gratuitas',
     latestTitle: 'Ultimas actualizaciones editoriales',
@@ -141,7 +154,7 @@ export const siteCopy = {
     heroText: 'Guida indipendente su cybersecurity, privacy e strumenti locali per decisioni online piu sicure.',
     primaryCta: 'Inizia dalle guide di sicurezza',
     secondaryCta: 'Apri il centro privacy',
-    categoriesTitle: 'Esplora HexaCyber',
+    categoriesTitle: 'Esplora HexaCybert',
     featuredTitle: 'Letture consigliate',
     toolsTitle: 'Strumenti locali gratuiti',
     latestTitle: 'Ultimi aggiornamenti editoriali',
@@ -156,7 +169,7 @@ export const siteCopy = {
     heroText: 'Orientacao independente sobre ciberseguranca, privacidade e ferramentas locais para melhores decisoes online.',
     primaryCta: 'Comecar pelos guias de seguranca',
     secondaryCta: 'Abrir o centro de privacidade',
-    categoriesTitle: 'Explorar HexaCyber',
+    categoriesTitle: 'Explorar HexaCybert',
     featuredTitle: 'Leituras recomendadas',
     toolsTitle: 'Ferramentas locais gratuitas',
     latestTitle: 'Ultimas atualizacoes editoriais',
@@ -171,7 +184,7 @@ export const siteCopy = {
     heroText: 'Onafhankelijke cybersecurity-hulp, privacy-uitleg en lokale tools voor veiligere online keuzes.',
     primaryCta: 'Begin met de beveiligingsgidsen',
     secondaryCta: 'Open het privacycentrum',
-    categoriesTitle: 'HexaCyber verkennen',
+    categoriesTitle: 'HexaCybert verkennen',
     featuredTitle: 'Aanbevolen artikelen',
     toolsTitle: 'Gratis lokale beveiligingstools',
     latestTitle: 'Laatste redactionele updates',
@@ -453,6 +466,29 @@ const networkTopics = [
   ['small-office-network', 'Small office network baseline', 'Basic segmentation and admin access controls.'],
 ] as const;
 
+const vpnTopics = [
+  ['vpn-basics', 'VPN basics', 'Understand what a VPN tunnel can protect and what still depends on accounts, browsers and device hygiene.'],
+  ['vpn-for-public-wifi', 'VPN for public Wi-Fi', 'Use a VPN on shared networks without ignoring phishing, account security or device updates.'],
+  ['vpn-privacy-limits', 'VPN privacy limits', 'See why provider trust, browser tracking, DNS choices and logged-in accounts still matter.'],
+  ['vpn-setup-checklist', 'VPN setup checklist', 'Review protocol, kill switch, DNS leak protection, auto-connect and recovery settings.'],
+  ['vpn-protocols-explained', 'VPN protocols explained', 'Compare WireGuard, OpenVPN and IKEv2 at a practical level without exaggerated claims.'],
+  ['vpn-and-dns-leaks', 'VPN and DNS leaks', 'Check DNS, IPv6 and WebRTC exposure before relying on a VPN for network privacy.'],
+  ['vpn-kill-switch-guide', 'VPN kill switch guide', 'Understand what a kill switch does and how to test it before travel or public Wi-Fi use.'],
+  ['vpn-for-travel', 'VPN for travel', 'Prepare devices, accounts and trusted networks before using hotels, airports or temporary SIMs.'],
+  ['vpn-for-streaming-privacy', 'VPN for streaming privacy', 'Separate privacy expectations from streaming access claims and provider terms.'],
+  ['vpn-for-remote-work', 'VPN for remote work', 'Use business VPNs, device posture and MFA as part of a broader access routine.'],
+  ['vpn-no-logs-claims', 'VPN no-logs claims', 'Read no-logs statements cautiously and look for audits, jurisdiction and transparent limits.'],
+  ['vpn-router-setup', 'VPN router setup', 'Know when router-level VPNs help and when per-device apps are easier to control.'],
+  ['vpn-on-mobile', 'VPN on mobile', 'Balance battery, always-on settings, trusted Wi-Fi and app permissions on phones.'],
+  ['vpn-vs-private-browsing', 'VPN vs private browsing', 'Learn the difference between local browser history controls and network tunneling.'],
+  ['vpn-vs-tor', 'VPN vs Tor', 'Compare common privacy goals, performance trade-offs and risks of combining tools incorrectly.'],
+  ['free-vpn-risks', 'Free VPN risks', 'Evaluate free VPNs with attention to funding model, logging, limits and data collection.'],
+  ['vpn-for-families', 'VPN for families', 'Set expectations for family devices without treating a VPN as parental control.'],
+  ['vpn-for-small-business', 'VPN for small business', 'Plan access, MFA, device updates and offboarding before adopting a VPN.'],
+  ['vpn-troubleshooting', 'VPN troubleshooting', 'Diagnose connection drops, slow speeds, DNS failures and blocked services methodically.'],
+  ['choosing-a-vpn', 'How to choose a VPN', 'Compare trust, security features, platform support, audits and cancellation terms before paying.'],
+] as const;
+
 const newsTopics = [
   ['cisa-mfa-guidance', 'CISA guidance: MFA beyond passwords', 'CISA explains why a second factor can reduce account takeover risk.', sourceLibrary.cisaMfa],
   ['nist-passkeys-guidelines', 'NIST guidance: passkeys and digital identity', 'NIST digital identity guidance recognizes modern authenticators such as passkeys.', sourceLibrary.nistIdentity],
@@ -466,7 +502,7 @@ const newsTopics = [
   ['roboform-import-sharing', 'RoboForm documents sharing and import workflows', 'RoboForm product materials describe import, sync and sharing capabilities.', sourceLibrary.roboform],
 ] as const;
 
-const dateFor = (index: number) => `2026-07-${String((index % 27) + 1).padStart(2, '0')}`;
+const dateFor = (index: number) => `2026-07-${String((index % 15) + 1).padStart(2, '0')}`;
 const minsFor = (title: string) => `${Math.max(5, Math.min(14, Math.round(title.length / 8)))} min read`;
 const levelLabels: Record<Lang, Record<Level, string>> = {
   en: { Beginner: 'Beginner', Intermediate: 'Intermediate', Advanced: 'Advanced' },
@@ -555,7 +591,7 @@ const localizedTemplates: Record<Lang, {
     seoPrefix: '',
   },
   fr: {
-    summaryPrefix: 'Guide HexaCyber sur',
+    summaryPrefix: 'Guide HexaCybert sur',
     intro: (title) => [`${title} aide a mettre en place une routine plus sure sans transformer chaque action en projet technique.`, 'L objectif pratique est de reduire les risques courants, de garder des options de recuperation et d eviter les decisions prises dans l urgence.'],
     risks: ['Un seul controle de securite rend la protection fragile.', 'Les messages urgents, les permissions floues et les mots de passe reutilises creent des risques evitables.', 'Une recuperation jamais testee peut echouer au mauvais moment.'],
     steps: ['Identifier le compte, l appareil, le reseau ou les donnees les plus importants.', 'Activer les mises a jour, les identifiants uniques et la MFA si disponible.', 'Verifier les permissions, les options de recuperation et les sessions actives.', 'Conserver des sauvegardes ou exports pour les donnees importantes.', 'Revoir la configuration apres tout changement majeur.'],
@@ -563,10 +599,10 @@ const localizedTemplates: Record<Lang, {
     checklist: ['Mot de passe unique ou passkey configure.', 'MFA activee avec codes de secours conserves hors ligne.', 'Email et telephone de recuperation verifies.', 'Permissions inutiles supprimees.', 'Sauvegarde ou export teste recemment.'],
     faq: [['Est-ce suffisant pour les personnes tres exposees ?', 'Les personnes a risque eleve doivent adapter ces conseils et parfois demander une aide specialisee.'], ['Faut-il tout changer en une fois ?', 'Non. Commencez par email, banque, gestionnaire de mots de passe et mises a jour.'], ['Un outil peut-il garantir la securite ?', 'Non. La securite repose sur plusieurs couches et une revision reguliere.']],
     conclusion: () => 'La meilleure approche est une routine suivie: identifiants uniques, mises a jour, recuperation et verification calme.',
-    seoPrefix: 'Guide HexaCyber en francais:',
+    seoPrefix: 'Guide HexaCybert en francais:',
   },
   de: {
-    summaryPrefix: 'HexaCyber-Leitfaden zu',
+    summaryPrefix: 'HexaCybert-Leitfaden zu',
     intro: (title) => [`${title} hilft, eine sicherere Routine aufzubauen, ohne jede Online-Aufgabe technisch kompliziert zu machen.`, 'Das praktische Ziel ist weniger Risiko, bessere Wiederherstellung und ruhigere Entscheidungen.'],
     risks: ['Ein einzelner Schutzmechanismus macht die Einrichtung fragil.', 'Dringende Nachrichten, unklare Berechtigungen und wiederverwendete Passworter fuhren oft zu vermeidbaren Fehlern.', 'Nie getestete Wiederherstellung kann im Ernstfall scheitern.'],
     steps: ['Wichtige Konten, Gerate, Netzwerke oder Daten identifizieren.', 'Updates, eindeutige Zugangsdaten und MFA aktivieren.', 'Berechtigungen, Wiederherstellung und aktive Sitzungen prufen.', 'Backups oder Exporte fur wichtige Daten behalten.', 'Die Einrichtung nach groseren Anderungen erneut prufen.'],
@@ -574,21 +610,21 @@ const localizedTemplates: Record<Lang, {
     checklist: ['Eindeutiges Passwort oder Passkey eingerichtet.', 'MFA aktiv und Backup-Codes sicher gespeichert.', 'Wiederherstellungs-E-Mail und Telefonnummer gepruft.', 'Unnotige Berechtigungen entfernt.', 'Backup oder Export kurzlich getestet.'],
     faq: [['Reicht das fur besonders gefahrdete Personen?', 'Personen mit hohem Risiko sollten die Schritte an ihr Bedrohungsmodell anpassen.'], ['Soll ich alles auf einmal andern?', 'Nein. Beginne mit E-Mail, Banking, Passwortmanager und Updates.'], ['Kann ein Tool Sicherheit garantieren?', 'Nein. Sicherheit ist eine mehrschichtige Routine.']],
     conclusion: () => 'Der sicherste Weg ist eine konstante Routine: eindeutige Zugangsdaten, Updates, Wiederherstellung und ruhige Prufung.',
-    seoPrefix: 'HexaCyber-Leitfaden:',
+    seoPrefix: 'HexaCybert-Leitfaden:',
   },
   es: {
-    summaryPrefix: 'Guia HexaCyber sobre',
+    summaryPrefix: 'Guia HexaCybert sobre',
     intro: (title) => [`${title} ayuda a crear una rutina mas segura sin convertir cada tarea en un proyecto tecnico.`, 'El objetivo practico es reducir riesgos comunes, mantener opciones de recuperacion y evitar decisiones tomadas con prisa.'],
     risks: ['Depender de un solo control, como una contrasena o un dispositivo, crea una configuracion fragil.', 'Los mensajes urgentes, permisos confusos y credenciales reutilizadas suelen provocar errores evitables.', 'Los planes de recuperacion que nunca se prueban pueden fallar justo cuando hacen falta.'],
-    steps: ['Identifica la cuenta, dispositivo, red o dato mas importante.', 'Activa actualizaciones, credenciales unicas y autenticacion multifactor cuando este disponible.', 'Revisa permisos, opciones de recuperacion y sesiones activas antes de un problema.', 'Mantén copias o exportaciones de la informacion que no puedes perder.', 'Vuelve a revisar la configuracion despues de cambios importantes.'],
+    steps: ['Identifica la cuenta, dispositivo, red o dato mas importante.', 'Activa actualizaciones, credenciales unicas y autenticacion multifactor cuando este disponible.', 'Revisa permisos, opciones de recuperacion y sesiones activas antes de un problema.', 'MantÃ©n copias o exportaciones de la informacion que no puedes perder.', 'Vuelve a revisar la configuracion despues de cambios importantes.'],
     mistakes: ['Usar la misma contrasena en cuentas importantes.', 'Guardar codigos de recuperacion dentro de la cuenta que deben recuperar.', 'Ignorar actualizaciones del navegador, router o movil durante meses.', 'Tratar la navegacion privada o una VPN como anonimato total.'],
     checklist: ['Contrasena unica o passkey configurada.', 'MFA activada con codigos de respaldo guardados de forma segura.', 'Correo y telefono de recuperacion revisados.', 'Permisos innecesarios eliminados.', 'Copia de seguridad o exportacion probada recientemente.'],
     faq: [['Es suficiente para usuarios de alto riesgo?', 'Los usuarios de alto riesgo deben adaptar los pasos a su modelo de amenaza y pueden necesitar ayuda profesional.'], ['Debo cambiar todo de una vez?', 'No. Empieza por correo, banca, gestor de contrasenas y actualizaciones.'], ['Una herramienta puede garantizar seguridad?', 'No. La seguridad es una rutina por capas que necesita revision periodica.']],
     conclusion: () => 'El camino mas seguro suele ser una rutina constante: credenciales unicas, actualizaciones, recuperacion y verificacion cuidadosa.',
-    seoPrefix: 'Guia HexaCyber:',
+    seoPrefix: 'Guia HexaCybert:',
   },
   it: {
-    summaryPrefix: 'Guida HexaCyber su',
+    summaryPrefix: 'Guida HexaCybert su',
     intro: (title) => [`${title} aiuta a creare una routine piu sicura senza rendere tecnica ogni attivita online.`, 'L obiettivo pratico e ridurre i rischi comuni, mantenere opzioni di recupero e decidere senza fretta.'],
     risks: ['Dipendere da un solo controllo rende fragile la configurazione.', 'Messaggi urgenti, permessi confusi e credenziali riutilizzate portano a errori evitabili.', 'I piani di recupero non testati possono fallire nel momento peggiore.'],
     steps: ['Identifica account, dispositivo, rete o dato piu importante.', 'Attiva aggiornamenti, credenziali uniche e MFA dove disponibile.', 'Controlla permessi, recupero e sessioni attive prima dei problemi.', 'Mantieni backup o esportazioni per i dati importanti.', 'Rivedi la configurazione dopo cambiamenti importanti.'],
@@ -596,10 +632,10 @@ const localizedTemplates: Record<Lang, {
     checklist: ['Password unica o passkey configurata.', 'MFA attiva con codici di backup conservati in sicurezza.', 'Email e telefono di recupero verificati.', 'Permessi inutili rimossi.', 'Backup o esportazione testati di recente.'],
     faq: [['Basta per utenti ad alto rischio?', 'Gli utenti ad alto rischio dovrebbero adattare i passaggi al proprio modello di minaccia.'], ['Devo cambiare tutto subito?', 'No. Inizia da email, banca, password manager e aggiornamenti.'], ['Uno strumento puo garantire sicurezza?', 'No. La sicurezza e una routine a piu livelli.']],
     conclusion: () => 'Il percorso piu sicuro e una routine costante: credenziali uniche, aggiornamenti, recupero e verifica attenta.',
-    seoPrefix: 'Guida HexaCyber:',
+    seoPrefix: 'Guida HexaCybert:',
   },
   pt: {
-    summaryPrefix: 'Guia HexaCyber sobre',
+    summaryPrefix: 'Guia HexaCybert sobre',
     intro: (title) => [`${title} ajuda a criar uma rotina mais segura sem transformar cada tarefa num projeto tecnico.`, 'O objetivo pratico e reduzir riscos comuns, manter opcoes de recuperacao e evitar decisoes apressadas.'],
     risks: ['Depender de um unico controlo torna a configuracao fragil.', 'Mensagens urgentes, permissoes confusas e credenciais reutilizadas levam a erros evitaveis.', 'Planos de recuperacao nunca testados podem falhar quando mais importam.'],
     steps: ['Identifique a conta, dispositivo, rede ou dado mais importante.', 'Ative atualizacoes, credenciais unicas e MFA quando disponivel.', 'Reveja permissoes, recuperacao e sessoes ativas antes de problemas.', 'Mantenha copias ou exportacoes da informacao essencial.', 'Reveja a configuracao apos mudancas importantes.'],
@@ -607,10 +643,10 @@ const localizedTemplates: Record<Lang, {
     checklist: ['Palavra-passe unica ou passkey configurada.', 'MFA ativa com codigos de seguranca guardados.', 'Email e telefone de recuperacao revistos.', 'Permissoes desnecessarias removidas.', 'Copia ou exportacao testada recentemente.'],
     faq: [['Isto basta para utilizadores de alto risco?', 'Utilizadores de alto risco devem adaptar os passos ao seu modelo de ameaca.'], ['Devo mudar tudo de uma vez?', 'Nao. Comece por email, banco, gestor de palavras-passe e atualizacoes.'], ['Uma ferramenta garante seguranca?', 'Nao. A seguranca e uma rotina por camadas.']],
     conclusion: () => 'O caminho mais seguro e uma rotina constante: credenciais unicas, atualizacoes, recuperacao e verificacao cuidadosa.',
-    seoPrefix: 'Guia HexaCyber:',
+    seoPrefix: 'Guia HexaCybert:',
   },
   nl: {
-    summaryPrefix: 'HexaCyber-gids over',
+    summaryPrefix: 'HexaCybert-gids over',
     intro: (title) => [`${title} helpt een veiligere routine op te bouwen zonder elke online taak technisch te maken.`, 'Het praktische doel is minder risico, betere herstelopties en rustigere beslissingen.'],
     risks: ['Afhankelijk zijn van een enkele maatregel maakt de setup kwetsbaar.', 'Urgente berichten, onduidelijke machtigingen en hergebruikte wachtwoorden veroorzaken vaak vermijdbare fouten.', 'Herstelplannen die nooit getest zijn kunnen falen wanneer ze nodig zijn.'],
     steps: ['Bepaal welk account, apparaat, netwerk of gegeven het belangrijkst is.', 'Schakel updates, unieke inloggegevens en MFA in waar mogelijk.', 'Controleer machtigingen, herstelopties en actieve sessies.', 'Bewaar back-ups of exports van belangrijke informatie.', 'Controleer de setup opnieuw na grote wijzigingen.'],
@@ -618,7 +654,7 @@ const localizedTemplates: Record<Lang, {
     checklist: ['Uniek wachtwoord of passkey ingesteld.', 'MFA actief en back-upcodes veilig bewaard.', 'Herstelmail en telefoonnummer gecontroleerd.', 'Onnodige machtigingen verwijderd.', 'Back-up of export recent getest.'],
     faq: [['Is dit genoeg voor gebruikers met hoog risico?', 'Gebruikers met hoog risico moeten de stappen aanpassen aan hun dreigingsmodel.'], ['Moet ik alles tegelijk veranderen?', 'Nee. Begin met e-mail, bankieren, wachtwoordmanager en updates.'], ['Kan een tool veiligheid garanderen?', 'Nee. Veiligheid is een gelaagde routine.']],
     conclusion: () => 'De veiligste route is meestal een vaste routine: unieke gegevens, updates, herstelplanning en zorgvuldige controle.',
-    seoPrefix: 'HexaCyber-gids:',
+    seoPrefix: 'HexaCybert-gids:',
   },
 };
 
@@ -645,7 +681,7 @@ const localizeArticle = (article: Omit<Article, 'lang'>, lang: Lang): Article =>
     lang,
     title,
     description,
-    author: 'HexaCyber Editorial',
+    author: 'HexaCybert Editorial',
     readingTime: localizedReadingTime(title, lang),
     tags: [section.title, article.type, levelLabels[lang][article.level]],
     audience: localizedAudience[lang],
@@ -671,7 +707,7 @@ const makeArticle = (
   level: level as Level,
   date: dateFor(index),
   updated: '2026-07-15',
-  author: 'HexaCyber Editorial',
+  author: 'HexaCybert Editorial',
   readingTime: minsFor(title),
   tags: [category.replace('-', ' '), type, level.toLowerCase()],
   audience: ['Individuals', type === 'cybersecurity' ? 'Small teams' : 'Families'],
@@ -690,11 +726,12 @@ const baseArticles = [
   ...cyberTopics.map((topic, index) => makeArticle([...topic, 'Beginner', sourceLibrary.cisaMfa], index + 120, 'cybersecurity', 'cybersecurity')),
   ...deviceTopics.map((topic, index) => makeArticle([...topic, 'Beginner', sourceLibrary.ncscSmallOrg], index + 140, 'device-security', 'device')),
   ...networkTopics.map((topic, index) => makeArticle([...topic, 'Intermediate', sourceLibrary.ncscSmallOrg], index + 155, 'wifi-security', 'network')),
+  ...vpnTopics.map((topic, index) => makeArticle([...topic, 'Beginner', sourceLibrary.ncscVpn], index + 165, 'vpn', 'privacy', [sourceLibrary.cisaWireless, sourceLibrary.cyberCanadaWifi, sourceLibrary.ietfIkev2])),
   ...newsTopics.map((topic, index) => makeArticle([topic[0], topic[1], topic[2], 'Beginner', topic[3]], index + 170, 'news', 'news')),
 ];
 
 export const articles: Article[] = [
-  ...(['en', 'fr', 'de', 'es', 'it', 'pt', 'nl'] as Lang[]).flatMap((lang) => baseArticles.map((article) => localizeArticle(article, lang))),
+  ...(['en', 'fr', 'es'] as Lang[]).flatMap((lang) => baseArticles.map((article) => localizeArticle(article, lang))),
 ];
 
 export const toolCatalog = [
@@ -798,24 +835,108 @@ export const evergreenPages = {
 
 export const legalPages = {
   'privacy-policy': {
-    title: 'Privacy Policy',
-    description: 'How HexaCyber should handle privacy, data minimization and future analytics choices.',
-    body: ['This starter policy is a publication template and should be reviewed before launch.', 'Do not add analytics, email marketing or advertising scripts before consent and documentation are ready.'],
+    title: { en: 'Privacy Policy', fr: 'Politique de confidentialite', es: 'Politica de privacidad' },
+    description: {
+      en: 'How HexaCybert handles personal data, privacy choices and future analytics.',
+      fr: 'Comment HexaCybert traite les donnees personnelles, les choix de confidentialite et les futurs outils de mesure.',
+      es: 'Como HexaCybert trata los datos personales, las opciones de privacidad y futuras mediciones.',
+    },
+    body: {
+      en: ['HexaCybert is an informational website administered from France. We aim to collect the minimum data needed to operate the site.', `For editorial contact, corrections or privacy requests, write to ${contactEmail}.`, 'At launch, the site does not require account creation, does not sell personal data and does not publish fake affiliate tracking links.', 'Server logs may be created by hosting providers for security, abuse prevention and technical operation. Optional analytics or marketing tools must not load unless they are documented and the visitor has given valid consent.', 'We keep privacy notices under review when site features change, especially if analytics, forms, newsletters or affiliate integrations are added later.'],
+      fr: ['HexaCybert est un site d information administre depuis la France. Nous cherchons a collecter le minimum de donnees necessaires au fonctionnement du site.', `Pour une question editoriale, une correction ou une demande de confidentialite, ecrivez a ${contactEmail}.`, 'Au lancement, le site ne demande pas de compte, ne vend pas de donnees personnelles et ne publie pas de faux liens affilies.', 'Des journaux techniques peuvent etre crees par les hebergeurs pour la securite, la prevention des abus et le fonctionnement du service. Les outils optionnels de mesure ou de marketing ne doivent pas se charger sans information claire et consentement valide.', 'Cette notice est revue lorsque les fonctionnalites changent, notamment en cas d ajout futur de statistiques, formulaires, newsletter ou integrations affiliees.'],
+      es: ['HexaCybert es un sitio informativo administrado desde Francia. Nuestro objetivo es recopilar solo los datos minimos necesarios para operar el sitio.', `Para contacto editorial, correcciones o solicitudes de privacidad, escribe a ${contactEmail}.`, 'En el lanzamiento, el sitio no exige crear cuenta, no vende datos personales y no publica enlaces de afiliado falsos.', 'El proveedor de alojamiento puede generar registros tecnicos para seguridad, prevencion de abuso y funcionamiento. Las herramientas opcionales de analitica o marketing no deben cargarse sin informacion clara y consentimiento valido.', 'Revisamos esta politica cuando cambian las funciones del sitio, especialmente si se agregan analitica, formularios, newsletter o integraciones de afiliados en el futuro.'],
+    },
   },
   cookies: {
-    title: 'Cookie Policy',
-    description: 'Essential cookies and optional consent categories for future integrations.',
-    body: ['Essential preferences may be stored for site operation.', 'Optional analytics or marketing cookies should remain disabled until the visitor gives consent.'],
+    title: { en: 'Cookie Policy', fr: 'Politique cookies', es: 'Politica de cookies' },
+    description: {
+      en: 'Essential cookies and consent rules for optional tools.',
+      fr: 'Cookies essentiels et regles de consentement pour les outils optionnels.',
+      es: 'Cookies esenciales y reglas de consentimiento para herramientas opcionales.',
+    },
+    body: {
+      en: ['HexaCybert may store essential preferences, such as the cookie choice itself, so the site can remember a visitor decision.', 'Optional analytics, advertising, retargeting or affiliate tracking cookies should remain disabled until they are fully documented and accepted by the visitor.', 'Visitors can clear cookies in their browser settings. If optional tools are added later, the banner and this policy must describe their purpose, provider and duration.'],
+      fr: ['HexaCybert peut stocker des preferences essentielles, comme le choix cookie lui-meme, afin de memoriser la decision du visiteur.', 'Les cookies optionnels de mesure, publicite, retargeting ou suivi affilie doivent rester desactives tant qu ils ne sont pas documentes et acceptes par le visiteur.', 'Les visiteurs peuvent supprimer les cookies dans les reglages du navigateur. Si des outils optionnels sont ajoutes, la banniere et cette page devront indiquer leur finalite, fournisseur et duree.'],
+      es: ['HexaCybert puede guardar preferencias esenciales, como la decision sobre cookies, para recordar la eleccion del visitante.', 'Las cookies opcionales de analitica, publicidad, retargeting o seguimiento de afiliados deben permanecer desactivadas hasta estar documentadas y aceptadas por el visitante.', 'Los visitantes pueden borrar cookies desde el navegador. Si se agregan herramientas opcionales, el banner y esta politica deben explicar su finalidad, proveedor y duracion.'],
+    },
   },
   terms: {
-    title: 'Terms and Conditions',
-    description: 'Editorial website terms for informational cybersecurity content.',
-    body: ['HexaCyber content is educational and not a substitute for professional incident response, legal or compliance advice.', 'Review jurisdiction, liability and contact details before publishing.'],
+    title: { en: 'Terms and Conditions', fr: 'Conditions d utilisation', es: 'Terminos y condiciones' },
+    description: {
+      en: 'Terms for using HexaCybert educational cybersecurity content.',
+      fr: 'Conditions applicables au contenu educatif de cybersecurite de HexaCybert.',
+      es: 'Condiciones de uso del contenido educativo de ciberseguridad de HexaCybert.',
+    },
+    body: {
+      en: ['HexaCybert publishes educational cybersecurity and privacy information. It is not legal, compliance, financial or emergency incident-response advice.', 'Readers remain responsible for checking whether guidance fits their device, jurisdiction, employer rules and risk level.', 'We may update, remove or reorganize content when information changes or when errors are found.', `Questions about these terms can be sent to ${contactEmail}.`],
+      fr: ['HexaCybert publie des informations educatives sur la cybersecurite et la confidentialite. Ce contenu ne remplace pas un conseil juridique, conformite, financier ou une intervention d urgence.', 'Les lecteurs doivent verifier si les conseils conviennent a leurs appareils, pays, regles professionnelles et niveau de risque.', 'Nous pouvons mettre a jour, retirer ou reorganiser le contenu lorsque les informations changent ou qu une erreur est identifiee.', `Les questions peuvent etre envoyees a ${contactEmail}.`],
+      es: ['HexaCybert publica informacion educativa sobre ciberseguridad y privacidad. No sustituye asesoramiento legal, de cumplimiento, financiero ni respuesta profesional ante incidentes.', 'Cada lector debe comprobar si la guia encaja con sus dispositivos, pais, reglas laborales y nivel de riesgo.', 'Podemos actualizar, retirar o reorganizar contenido cuando cambie la informacion o se detecten errores.', `Las preguntas pueden enviarse a ${contactEmail}.`],
+    },
+  },
+  'legal-notice': {
+    title: { en: 'Legal Notice', fr: 'Mentions legales', es: 'Aviso legal' },
+    description: {
+      en: 'Publisher, administration country and editorial contact for HexaCybert.',
+      fr: 'Editeur, pays d administration et contact editorial de HexaCybert.',
+      es: 'Editor, pais de administracion y contacto editorial de HexaCybert.',
+    },
+    body: {
+      en: ['Site name: HexaCybert.', 'Administration country: France.', `Editorial and legal contact: ${contactEmail}.`, 'HexaCybert is published as an informational security and privacy resource. Hosting and technical providers may process limited technical data needed to deliver the site.'],
+      fr: ['Nom du site : HexaCybert.', 'Pays d administration : France.', `Contact editorial et legal : ${contactEmail}.`, 'HexaCybert est publie comme ressource d information sur la securite et la confidentialite. Les fournisseurs techniques peuvent traiter des donnees limitees necessaires a la diffusion du site.'],
+      es: ['Nombre del sitio: HexaCybert.', 'Pais de administracion: Francia.', `Contacto editorial y legal: ${contactEmail}.`, 'HexaCybert se publica como recurso informativo de seguridad y privacidad. Los proveedores tecnicos pueden tratar datos limitados necesarios para entregar el sitio.'],
+    },
+  },
+  'affiliate-disclosure': {
+    title: { en: 'Affiliate Disclosure', fr: 'Declaration d affiliation', es: 'Divulgacion de afiliados' },
+    description: {
+      en: 'How HexaCybert will disclose future affiliate relationships.',
+      fr: 'Comment HexaCybert signalera les futures relations d affiliation.',
+      es: 'Como HexaCybert informara futuras relaciones de afiliacion.',
+    },
+    body: {
+      en: ['HexaCybert may apply for affiliate programs in the future, including VPN or security software programs. No partnership should be implied unless it is active and disclosed on the relevant page.', 'Affiliate compensation must not determine editorial conclusions, rankings or security claims. Reviews should explain evidence, limitations and update dates.', 'If affiliate links are added, they must be clearly labelled before or near the link and must not use misleading urgency, fake discounts or unsupported claims.'],
+      fr: ['HexaCybert peut demander a rejoindre des programmes d affiliation a l avenir, y compris pour des VPN ou logiciels de securite. Aucun partenariat ne doit etre suppose sans relation active et mention claire sur la page concernee.', 'La remuneration affiliee ne doit pas determiner les conclusions editoriales, classements ou affirmations de securite.', 'Si des liens affilies sont ajoutes, ils devront etre signales clairement, sans urgence trompeuse, fausses reductions ou promesses non etayees.'],
+      es: ['HexaCybert puede solicitar programas de afiliados en el futuro, incluidos programas de VPN o software de seguridad. No debe suponerse ninguna colaboracion si no esta activa y declarada en la pagina correspondiente.', 'La compensacion de afiliados no debe determinar conclusiones editoriales, rankings ni afirmaciones de seguridad.', 'Si se agregan enlaces de afiliado, deben etiquetarse claramente y no usar urgencia enganosa, descuentos falsos ni afirmaciones sin respaldo.'],
+    },
+  },
+  'editorial-policy': {
+    title: { en: 'Editorial Policy', fr: 'Politique editoriale', es: 'Politica editorial' },
+    description: {
+      en: 'Editorial standards for practical, neutral security guidance.',
+      fr: 'Regles editoriales pour des conseils de securite pratiques et neutres.',
+      es: 'Normas editoriales para guias de seguridad practicas y neutrales.',
+    },
+    body: {
+      en: ['HexaCybert prioritizes practical guidance, primary sources, clear limits and accessible language.', 'We avoid invented testing, fake awards, unsupported anonymity claims and pressure-based buying language.', 'Security content should explain what a tool can do, what it cannot do and which safer habits still matter.'],
+      fr: ['HexaCybert privilegie les conseils pratiques, les sources primaires, les limites claires et un langage accessible.', 'Nous evitons les tests inventes, faux prix, promesses d anonymat non prouvees et formulations commerciales sous pression.', 'Le contenu de securite doit expliquer ce qu un outil peut faire, ce qu il ne peut pas faire et quelles habitudes restent importantes.'],
+      es: ['HexaCybert prioriza orientacion practica, fuentes primarias, limites claros y lenguaje accesible.', 'Evitamos pruebas inventadas, premios falsos, promesas de anonimato sin respaldo y lenguaje de compra con presion.', 'El contenido de seguridad debe explicar que puede hacer una herramienta, que no puede hacer y que habitos seguros siguen siendo importantes.'],
+    },
+  },
+  'corrections-policy': {
+    title: { en: 'Corrections Policy', fr: 'Politique de corrections', es: 'Politica de correcciones' },
+    description: {
+      en: 'How readers can report errors and how HexaCybert updates content.',
+      fr: 'Comment signaler une erreur et comment HexaCybert met a jour le contenu.',
+      es: 'Como reportar errores y como HexaCybert actualiza contenido.',
+    },
+    body: {
+      en: [`Send corrections to ${contactEmail} with the page URL, the issue and any supporting source.`, 'We review factual errors, broken links, outdated guidance, mistranslations and accessibility issues.', 'When a correction changes meaning, the affected page should be updated with a new modified date. Minor spelling or formatting fixes may be made silently.'],
+      fr: [`Envoyez les corrections a ${contactEmail} avec l URL de la page, le probleme et une source utile.`, 'Nous examinons les erreurs factuelles, liens casses, conseils obsoletes, problemes de traduction et d accessibilite.', 'Lorsqu une correction change le sens, la page concernee doit etre mise a jour avec une nouvelle date de modification. Les corrections mineures de forme peuvent etre faites sans note.'],
+      es: [`Envia correcciones a ${contactEmail} con la URL de la pagina, el problema y una fuente de apoyo.`, 'Revisamos errores factuales, enlaces rotos, guias desactualizadas, traducciones incorrectas y problemas de accesibilidad.', 'Cuando una correccion cambia el significado, la pagina afectada debe actualizar su fecha de modificacion. Los ajustes menores de ortografia o formato pueden hacerse sin aviso.'],
+    },
   },
   methodology: {
-    title: 'Editorial Methodology',
-    description: 'How HexaCyber researches, reviews and updates security content.',
-    body: ['Content should be neutral, practical and updated when products, standards or threat context changes.', 'Avoid unverifiable claims, invented statistics, fake test results and commercial pressure.'],
+    title: { en: 'Editorial Methodology', fr: 'Methodologie editoriale', es: 'Metodologia editorial' },
+    description: {
+      en: 'How HexaCybert researches, reviews and updates security content.',
+      fr: 'Comment HexaCybert recherche, revise et met a jour le contenu de securite.',
+      es: 'Como HexaCybert investiga, revisa y actualiza contenido de seguridad.',
+    },
+    body: {
+      en: ['We prefer official documentation, standards bodies, vendor documentation and reputable public-interest security guidance.', 'Comparison pages should explain trade-offs instead of declaring a universal winner. Product claims must be separated from verified facts.', 'Dates must not be set in the future. Pages should be reviewed when standards, product features, pricing, privacy terms or threat context materially change.'],
+      fr: ['Nous privilegions la documentation officielle, les organismes de normalisation, la documentation des fournisseurs et les guides de securite d interet public reconnus.', 'Les comparatifs doivent expliquer les compromis plutot que designer un gagnant universel. Les affirmations commerciales doivent etre separees des faits verifies.', 'Les dates ne doivent pas etre placees dans le futur. Les pages doivent etre revues lorsque les standards, fonctions, prix, conditions de confidentialite ou menaces changent de facon importante.'],
+      es: ['Preferimos documentacion oficial, organismos de estandares, documentacion de proveedores y guias de seguridad de interes publico con buena reputacion.', 'Las comparativas deben explicar ventajas y limites en lugar de declarar un ganador universal. Las afirmaciones comerciales deben separarse de los hechos verificados.', 'Las fechas no deben estar en el futuro. Las paginas deben revisarse cuando cambien estandares, funciones, precios, condiciones de privacidad o contexto de amenazas de forma importante.'],
+    },
   },
 } as const;
 

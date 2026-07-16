@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Disallow:
 
-Sitemap: https://hexacyber.example/sitemap-index.xml
+Sitemap: https://alexis0541.github.io/HexaCybert/sitemap-index.xml

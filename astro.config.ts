@@ -1,4 +1,4 @@
-import path from 'path';
+﻿import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { defineConfig } from 'astro/config';
@@ -29,7 +29,7 @@ const normalizeBase = (value?: string) => {
 
   return `/${value.replace(/^\/+|\/+$/g, '')}`;
 };
-const configuredSite = process.env.SITE ?? githubPagesSite ?? 'https://hexacyber.example';
+const configuredSite = process.env.SITE ?? githubPagesSite ?? 'https://hexacybert.example';
 const configuredBase = normalizeBase(process.env.BASE_PATH ?? githubPagesBase);
 const shouldCompress = process.env.DISABLE_COMPRESS !== 'true';
 
