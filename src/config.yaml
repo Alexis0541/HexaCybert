@@ -1,8 +1,7 @@
-﻿site:
+site:
   name: HexaCybert
-  site: 'https://hexacybert.example'
-  base: '/'
-  trailingSlash: false
+  site: 'https://hexacybert.xyz'
+  trailingSlash: true
 
   googleSiteVerificationId: null
 
@@ -27,7 +26,7 @@ metadata:
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: fr
   textDirection: ltr
 
 apps:

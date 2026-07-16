@@ -18,19 +18,6 @@ import storefront from './vendor/integration';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const githubRepository = process.env.GITHUB_REPOSITORY;
-const githubOwner = githubRepository?.split('/')[0];
-const githubRepo = githubRepository?.split('/')[1];
-const githubPagesSite = githubOwner ? `https://${githubOwner}.github.io` : undefined;
-const githubPagesBase =
-  githubOwner && githubRepo && githubRepo !== `${githubOwner}.github.io` ? `/${githubRepo}` : '/';
-const normalizeBase = (value?: string) => {
-  if (!value || value === '/') return '/';
-
-  return `/${value.replace(/^\/+|\/+$/g, '')}`;
-};
-const configuredSite = process.env.SITE ?? githubPagesSite ?? 'https://hexacybert.example';
-const configuredBase = normalizeBase(process.env.BASE_PATH ?? githubPagesBase);
 const shouldCompress = process.env.DISABLE_COMPRESS !== 'true';
 
 const hasExternalScripts = false;
@@ -38,12 +25,9 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  site: configuredSite,
-  base: configuredBase,
+  site: 'https://hexacybert.xyz',
   output: 'static',
-  build: {
-    assetsPrefix: configuredBase === '/' ? undefined : configuredBase,
-  },
+  trailingSlash: 'always',
 
   integrations: [
     sitemap(),

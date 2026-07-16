@@ -36,7 +36,7 @@ const language = lang;
     <ApplyColorMode />
     <Metadata {...metadata} />
     {langCodes.map((code) => <link rel="alternate" hreflang={code} href={getCanonical(alternateLangPath(Astro.url.pathname, code))} />)}
-    <link rel="alternate" hreflang="x-default" href={getCanonical(alternateLangPath(Astro.url.pathname, 'en'))} />
+    <link rel="alternate" hreflang="x-default" href={getCanonical(alternateLangPath(Astro.url.pathname, 'fr'))} />
     <SiteVerification />
     <Analytics />
 

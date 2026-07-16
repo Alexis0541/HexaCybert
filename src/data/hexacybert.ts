@@ -743,7 +743,7 @@ const baseArticles = [
 ];
 
 export const articles: Article[] = [
-  ...(['en', 'fr', 'es'] as Lang[]).flatMap((lang) => baseArticles.map((article) => localizeArticle(article, lang))),
+  ...(['en', 'fr', 'de', 'es', 'it', 'pt', 'nl'] as Lang[]).flatMap((lang) => baseArticles.map((article) => localizeArticle(article, lang))),
 ];
 
 export const toolCatalog = [

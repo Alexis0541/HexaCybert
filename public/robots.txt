@@ -1,4 +1,4 @@
-﻿User-agent: *
+User-agent: *
 Disallow:
 
-Sitemap: https://alexis0541.github.io/HexaCybert/sitemap-index.xml
+Sitemap: https://hexacybert.xyz/sitemap-index.xml

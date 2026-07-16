@@ -2,7 +2,7 @@
   "name": "HexaCybert",
   "short_name": "HexaCybert",
   "description": "Guides, reviews and tools to help you stay secure online.",
-  "start_url": "/en/",
+  "start_url": "/fr/",
   "display": "standalone",
   "background_color": "#0B0C0C",
   "theme_color": "#0B0C0C",

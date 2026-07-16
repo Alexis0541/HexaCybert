@@ -8,35 +8,30 @@ const supportedLanguages = {
   nl: 'Nederlands',
 } as const;
 
-export const languages = {
-  en: supportedLanguages.en,
-  fr: supportedLanguages.fr,
-  es: supportedLanguages.es,
-} as const;
+export const languages = supportedLanguages;
 
 export type Lang = keyof typeof supportedLanguages;
 
-export const defaultLang: Lang = 'en';
+export const defaultLang: Lang = 'fr';
 export const langCodes = Object.keys(languages) as Lang[];
-const configuredBasePath = typeof process !== 'undefined' ? process.env.BASE_PATH : undefined;
-export const basePath = (configuredBasePath || import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+export const basePath = '';
 
 export const withBasePath = (path: string) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${basePath}${cleanPath}` || '/';
+  return cleanPath;
 };
 
 export const assetPath = (path: string) => withBasePath(path);
 
 export const getLangFromUrl = (url: URL): Lang => {
-  const pathname = basePath && url.pathname.startsWith(`${basePath}/`) ? url.pathname.slice(basePath.length) : url.pathname;
+  const pathname = url.pathname;
   const segment = pathname.split('/').filter(Boolean)[0] as Lang | undefined;
   return segment && langCodes.includes(segment) ? segment : defaultLang;
 };
 
 export const stripLang = (path: string) => {
   const rawPath = path || '/';
-  const cleanPath = basePath && rawPath.startsWith(`${basePath}/`) ? rawPath.slice(basePath.length) : rawPath;
+  const cleanPath = rawPath;
   const parts = cleanPath.split('/').filter(Boolean);
   if (parts[0] && langCodes.includes(parts[0] as Lang)) {
     const stripped = `/${parts.slice(1).join('/')}`;

@@ -27,16 +27,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Configure GitHub Pages environment
+      - name: Configure production environment
         run: |
-          OWNER="${GITHUB_REPOSITORY%%/*}"
-          REPO="${GITHUB_REPOSITORY#*/}"
-          echo "SITE=https://${OWNER}.github.io" >> "$GITHUB_ENV"
-          if [ "$REPO" = "${OWNER}.github.io" ]; then
-            echo "BASE_PATH=/" >> "$GITHUB_ENV"
-          else
-            echo "BASE_PATH=/${REPO}" >> "$GITHUB_ENV"
-          fi
           echo "DISABLE_COMPRESS=true" >> "$GITHUB_ENV"
 
       - name: Install dependencies

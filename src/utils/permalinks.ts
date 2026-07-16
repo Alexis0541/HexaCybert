@@ -14,18 +14,11 @@ const createPath = (...params: string[]) => {
 };
 
 const configuredSite = typeof process !== 'undefined' ? process.env.SITE : undefined;
-const configuredBasePath = typeof process !== 'undefined' ? process.env.BASE_PATH : undefined;
 export const SITE_URL = configuredSite || SITE.site;
-const BASE_PATHNAME = configuredBasePath || SITE.base || '/';
 const withConfiguredBase = (path = '') => {
-  const base = trimSlash(BASE_PATHNAME);
   const currentPath = trimSlash(path);
 
-  if (base && (currentPath === base || currentPath.startsWith(`${base}/`))) {
-    return createPath(currentPath);
-  }
-
-  return createPath(base, currentPath);
+  return createPath(currentPath);
 };
 
 export const cleanSlug = (text = '') =>
@@ -108,13 +101,13 @@ export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
 /** */
 export const getAsset = (path: string): string =>
   '/' +
-  [BASE_PATHNAME, path]
+  [path]
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string => createPath(permalink);
 
 /** */
 type MenuHref = { type?: string; url?: string };

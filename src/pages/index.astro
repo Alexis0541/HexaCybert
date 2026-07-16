@@ -1,5 +1,18 @@
 ---
-import { localizePath } from '~/utils/i18n';
-
-return Astro.redirect(localizePath('/', 'en'));
+const target = '/fr/';
 ---
+
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://hexacybert.xyz/fr/" />
+    <title>Redirection vers HexaCybert</title>
+  </head>
+  <body>
+    <p><a href={target}>Continuer vers HexaCybert en francais</a></p>
+  </body>
+</html>
