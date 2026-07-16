@@ -1,0 +1,125 @@
+---
+import { Icon } from 'astro-icon/components';
+import PageLayout from '~/layouts/PageLayout.astro';
+import ArticleCard from '~/components/ArticleCard.astro';
+import SecurityTools from '~/components/SecurityTools.astro';
+import { getArticles, getSection, localizedCopy, resourceGroups, sectionOrder } from '~/data/hexacyber';
+import { assetPath, langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
+
+export const getStaticPaths = () => langCodes.map((lang) => ({ params: { lang } }));
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const copy = localizedCopy(lang);
+const articles = getArticles(lang);
+const featured = ['what-is-cybersecurity', 'digital-privacy-basics', 'bitwarden', 'passkeys-vs-passwords', 'home-router-basics', 'cisa-mfa-guidance']
+  .map((slug) => articles.find((article) => article.slug === slug))
+  .filter(Boolean);
+const metadata = {
+  title: `HexaCyber - ${copy.heroTitle}`,
+  ignoreTitleTemplate: true,
+  description: copy.description,
+};
+const logoSrc = assetPath('/branding/hexacyber-logo-horizontal-dark.svg');
+---
+
+<PageLayout metadata={metadata} lang={lang}>
+  <section class="relative overflow-hidden border-b" style="border-color: var(--hc-border)">
+    <div class="absolute inset-0 opacity-90" style="background: radial-gradient(circle at 80% 8%, rgb(36 200 117 / .16), transparent 26rem), linear-gradient(140deg, var(--hc-bg), var(--hc-bg-soft) 58%, #11130f)"></div>
+    <div class="hc-shell relative grid gap-10 py-16 lg:grid-cols-[1fr_.9fr] lg:items-center lg:py-20">
+      <div>
+        <img class="mb-8 h-16 w-auto" src={logoSrc} alt="HexaCyber" />
+        <p class="hc-eyebrow">{copy.description}</p>
+        <h1 class="mt-4 max-w-4xl text-5xl font-black sm:text-6xl lg:text-7xl">{copy.heroTitle}</h1>
+        <p class="mt-6 max-w-2xl text-xl leading-9 hc-muted">{copy.heroText}</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a class="hc-button" href={localizePath('/guides', lang)}>{copy.primaryCta}</a>
+          <a class="hc-button hc-button-secondary" href={localizePath('/privacy-center', lang)}>{copy.secondaryCta}</a>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {sectionOrder.slice(0, 6).map((key) => {
+          const section = getSection(lang, key);
+          return (
+            <a class="hc-card p-5 hover:border-[var(--hc-accent)]" href={localizePath(`/${key}`, lang)}>
+              <Icon name={section.icon} class="h-8 w-8 text-[var(--hc-accent)]" />
+              <h2 class="mt-4 text-xl font-black">{section.title}</h2>
+              <p class="mt-2 text-base leading-7 hc-muted">{section.description}</p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="hc-shell hc-section">
+    <h2 class="text-3xl font-black sm:text-4xl">{copy.categoriesTitle}</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {sectionOrder.map((key) => {
+        const section = getSection(lang, key);
+        return (
+          <a class="hc-card-soft p-5 hover:border-[var(--hc-accent)]" href={localizePath(`/${key}`, lang)}>
+            <Icon name={section.icon} class="h-7 w-7 text-[var(--hc-accent)]" />
+            <h3 class="mt-4 text-lg font-black">{section.title}</h3>
+            <p class="mt-2 text-base leading-7 hc-muted">{section.description}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="hc-shell hc-section">
+    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="hc-eyebrow">{t.explore}</p>
+        <h2 class="mt-2 text-3xl font-black sm:text-4xl">{getSection(lang, 'resources').title}</h2>
+      </div>
+      <a class="hc-link" href={localizePath('/resources', lang)}>{t.openResourceCenter}</a>
+    </div>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      {resourceGroups.slice(0, 6).map(([group, links]) => (
+        <div class="hc-card p-5">
+          <h3 class="text-xl font-black">{group}</h3>
+          <ul class="mt-3 space-y-2 text-base hc-muted">
+            {links.map((slug) => {
+              const article = articles.find((item) => item.slug === slug);
+              return article ? <li><a class="hover:text-[var(--hc-accent)]" href={localizePath(`/articles/${article.slug}`, lang)}>{article.title}</a></li> : null;
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="hc-shell hc-section">
+    <h2 class="text-3xl font-black sm:text-4xl">{copy.featuredTitle}</h2>
+    <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {featured.map((article) => article && <ArticleCard article={article} lang={lang} />)}
+    </div>
+  </section>
+
+  <section class="hc-shell hc-section" id="tools">
+    <h2 class="text-3xl font-black sm:text-4xl">{copy.toolsTitle}</h2>
+    <div class="mt-6"><SecurityTools lang={lang} /></div>
+  </section>
+
+  <section class="hc-shell hc-section">
+    <h2 class="text-3xl font-black sm:text-4xl">{copy.latestTitle}</h2>
+    <div class="mt-6 grid gap-5 md:grid-cols-3">
+      {articles.slice(0, 9).map((article) => <ArticleCard article={article} lang={lang} />)}
+    </div>
+  </section>
+
+  <section class="hc-shell hc-section">
+    <form class="hc-card p-6 md:flex md:items-center md:justify-between md:gap-8">
+      <div>
+        <h2 class="text-2xl font-black">{copy.newsletterTitle}</h2>
+        <p class="mt-2 max-w-2xl text-base leading-7 hc-muted">{copy.newsletterText}</p>
+      </div>
+      <div class="mt-5 flex gap-2 md:mt-0">
+        <input class="hc-input min-w-0" type="email" required placeholder={copy.emailPlaceholder} />
+        <button class="hc-button" type="submit">{copy.subscribe}</button>
+      </div>
+    </form>
+  </section>
+</PageLayout>

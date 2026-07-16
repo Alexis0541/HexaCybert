@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" role="img" aria-labelledby="title desc">
+  <title>HexaCyber</title>
+  <desc>HexaCyber social preview image</desc>
+  <rect width="1200" height="628" fill="#0B0C0C"/>
+  <path d="M0 0h1200v628H0z" fill="#0B0C0C"/>
+  <circle cx="980" cy="90" r="240" fill="#24C875" opacity=".10"/>
+  <circle cx="150" cy="560" r="210" fill="#A8E36F" opacity=".08"/>
+  <path d="M180 142 300 72l120 70v140l-120 70-120-70V142Z" fill="#131514" stroke="#24C875" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M245 220c0-34 23-57 55-57s55 23 55 57v18h-22v-18c0-21-13-35-33-35s-33 14-33 35v18h-22v-18Z" fill="#F3F1E9"/>
+  <rect x="226" y="234" width="148" height="92" rx="22" fill="#24C875"/>
+  <path d="M300 262a20 20 0 0 0-10 37v15h22v-15a20 20 0 0 0-12-37Z" fill="#07100B"/>
+  <text x="480" y="235" fill="#F3F1E9" font-family="Manrope, Inter, Arial, sans-serif" font-size="82" font-weight="900">HexaCyber</text>
+  <text x="486" y="300" fill="#A8E36F" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="4">PROTECT. SECURE. STAY PRIVATE.</text>
+  <text x="486" y="382" fill="#B6BCB7" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="500">Guides, reviews and local tools for safer digital life.</text>
+</svg>

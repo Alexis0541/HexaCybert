@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 120" role="img" aria-labelledby="title">
+  <title>HexaCyber logo</title>
+  <rect width="430" height="120" rx="16" fill="none"/>
+  <path d="M62 14 104 38v48l-42 24-42-24V38L62 14Z" fill="#131514" stroke="#24C875" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M41 58c0-12 8-20 21-20s21 8 21 20v6h-8v-6c0-7-5-12-13-12s-13 5-13 12v6h-8v-6Z" fill="#F3F1E9"/>
+  <rect x="35" y="61" width="54" height="33" rx="8" fill="#24C875"/>
+  <path d="M62 71a7 7 0 0 0-4 13v5h8v-5a7 7 0 0 0-4-13Z" fill="#07100B"/>
+  <text x="125" y="61" fill="#F3F1E9" font-family="Manrope, Inter, Arial, sans-serif" font-size="39" font-weight="900" letter-spacing="0">HexaCyber</text>
+  <text x="127" y="87" fill="#A8E36F" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="2">PROTECT. SECURE. STAY PRIVATE.</text>
+</svg>

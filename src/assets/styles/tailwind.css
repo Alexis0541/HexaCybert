@@ -1,0 +1,210 @@
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans:
+    'var(--hc-font-body, Inter Variable)', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-heading:
+    'var(--hc-font-heading, Manrope)', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --hc-bg: #0b0c0c;
+  --hc-bg-soft: #131514;
+  --hc-card: #1a1d1b;
+  --hc-card-strong: #20241f;
+  --hc-border: #303530;
+  --hc-text: #f3f1e9;
+  --hc-muted: #b6bcb7;
+  --hc-soft: #d8d6cd;
+  --hc-accent: #24c875;
+  --hc-accent-hover: #38e58b;
+  --hc-lime: #a8e36f;
+  --hc-warning: #e8a33a;
+  --hc-error: #e15b5b;
+  --hc-shadow: 0 24px 80px rgb(0 0 0 / 0.36);
+  color-scheme: dark;
+}
+
+html {
+  background: var(--hc-bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--hc-bg);
+  color: var(--hc-text);
+  font-family: var(--hc-font-body), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--hc-accent) 34%, transparent);
+  color: var(--hc-text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--hc-accent);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.hc-heading {
+  color: var(--hc-text);
+  font-family: var(--hc-font-heading), var(--hc-font-body), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+a {
+  color: inherit;
+}
+
+.hc-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgb(36 200 117 / 0.10), transparent 28rem),
+    linear-gradient(180deg, var(--hc-bg), #101210 42rem, var(--hc-bg));
+  color: var(--hc-text);
+}
+
+.hc-shell {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .hc-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+.hc-section {
+  padding-block: 3.5rem;
+}
+
+.hc-muted {
+  color: var(--hc-muted);
+}
+
+.hc-eyebrow {
+  color: var(--hc-accent);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hc-card {
+  border: 1px solid var(--hc-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--hc-card) 92%, transparent);
+  box-shadow: var(--hc-shadow);
+}
+
+.hc-card-soft {
+  border: 1px solid var(--hc-border);
+  border-radius: 8px;
+  background: var(--hc-bg-soft);
+}
+
+.hc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--hc-accent);
+  background: var(--hc-accent);
+  color: #07100b;
+  font-weight: 900;
+  line-height: 1.1;
+  padding: 0.8rem 1rem;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.hc-button:hover {
+  background: var(--hc-accent-hover);
+  border-color: var(--hc-accent-hover);
+  transform: translateY(-1px);
+}
+
+.hc-button-secondary {
+  border-color: var(--hc-border);
+  background: transparent;
+  color: var(--hc-text);
+}
+
+.hc-button-secondary:hover {
+  border-color: var(--hc-accent);
+  background: color-mix(in srgb, var(--hc-accent) 10%, transparent);
+}
+
+.hc-input {
+  width: 100%;
+  border: 1px solid var(--hc-border);
+  border-radius: 6px;
+  background: var(--hc-bg);
+  color: var(--hc-text);
+  padding: 0.8rem 0.95rem;
+  font-size: 1rem;
+}
+
+.hc-input:focus {
+  border-color: var(--hc-accent);
+  outline: none;
+}
+
+.hc-link {
+  color: var(--hc-accent);
+  font-weight: 750;
+}
+
+.hc-link:hover {
+  color: var(--hc-accent-hover);
+}
+
+.hc-prose {
+  color: var(--hc-soft);
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+.hc-prose :where(h2, h3) {
+  margin-top: 2.2rem;
+}
+
+.hc-prose :where(p, ul, ol) {
+  margin-top: 1rem;
+}
+
+.hc-prose :where(a) {
+  color: var(--hc-accent);
+  font-weight: 750;
+}
+
+.hc-prose :where(li) {
+  margin-top: 0.45rem;
+}
+
+.hc-callout {
+  border-left: 4px solid var(--hc-warning);
+  background: color-mix(in srgb, var(--hc-warning) 10%, var(--hc-card));
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.hc-danger {
+  border-left-color: var(--hc-error);
+  background: color-mix(in srgb, var(--hc-error) 10%, var(--hc-card));
+}

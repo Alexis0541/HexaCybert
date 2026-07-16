@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>HexaCyber symbol</title>
+  <rect width="128" height="128" rx="24" fill="#0B0C0C"/>
+  <path d="M64 12 108 38v52l-44 26-44-26V38L64 12Z" fill="#131514" stroke="#24C875" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M42 59c0-13 9-22 22-22s22 9 22 22v7h-8v-7c0-8-6-14-14-14s-14 6-14 14v7h-8v-7Z" fill="#F3F1E9"/>
+  <rect x="36" y="62" width="56" height="34" rx="8" fill="#24C875"/>
+  <path d="M64 72a7 7 0 0 0-4 13v5h8v-5a7 7 0 0 0-4-13Z" fill="#07100B"/>
+</svg>

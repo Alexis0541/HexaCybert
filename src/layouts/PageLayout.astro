@@ -1,0 +1,30 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import HexaHeader from '~/components/HexaHeader.astro';
+import HexaFooter from '~/components/HexaFooter.astro';
+import CookieConsent from '~/components/CookieConsent.astro';
+
+import type { MetaData } from '~/types';
+import type { Lang } from '~/utils/i18n';
+import { getLangFromUrl } from '~/utils/i18n';
+
+export interface Props {
+  metadata?: MetaData;
+  lang?: Lang;
+}
+
+const { metadata, lang = getLangFromUrl(Astro.url) } = Astro.props;
+---
+
+<Layout metadata={metadata} lang={lang}>
+  <slot name="header">
+    <HexaHeader lang={lang} currentPath={Astro.url.pathname} />
+  </slot>
+  <main>
+    <slot />
+  </main>
+  <slot name="footer">
+    <HexaFooter lang={lang} />
+  </slot>
+  <CookieConsent lang={lang} />
+</Layout>

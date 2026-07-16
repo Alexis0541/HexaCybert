@@ -1,0 +1,164 @@
+---
+import { Icon } from 'astro-icon/components';
+import PageLayout from '~/layouts/PageLayout.astro';
+import ArticleCard from '~/components/ArticleCard.astro';
+import { getArticle, getArticles, getSection, relatedArticles } from '~/data/hexacyber';
+import { langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
+
+export const getStaticPaths = () =>
+  langCodes.flatMap((lang) => getArticles(lang).map((article) => ({ params: { lang, slug: article.slug } })));
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const article = getArticle(lang, String(Astro.params.slug));
+if (!article) return Astro.redirect(localizePath('/', lang));
+const section = getSection(lang, article.category);
+const related = relatedArticles(article);
+const all = getArticles(lang);
+const index = all.findIndex((item) => item.slug === article.slug);
+const previous = all[index - 1];
+const next = all[index + 1];
+const articleUi = {
+  en: { published: 'Published', updated: 'Updated', inArticle: 'In this article', overview: 'Overview', risks: 'Risks', steps: 'Recommended steps', checklist: 'Checklist', questions: 'Questions', mistakes: 'Common mistakes', mainRisks: 'Main risks', noteTitle: 'HexaCyber note:', note: 'Treat security advice as a baseline. High-risk users should adapt these steps to their own exposure and local requirements.' },
+  fr: { published: 'Publie', updated: 'Mis a jour', inArticle: 'Dans cet article', overview: 'Apercu', risks: 'Risques', steps: 'Etapes recommandees', checklist: 'Checklist', questions: 'Questions', mistakes: 'Erreurs courantes', mainRisks: 'Risques principaux', noteTitle: 'Note HexaCyber:', note: 'Considerez ces conseils comme une base. Les personnes tres exposees doivent adapter les etapes a leur situation.' },
+  de: { published: 'Veroffentlicht', updated: 'Aktualisiert', inArticle: 'In diesem Artikel', overview: 'Uberblick', risks: 'Risiken', steps: 'Empfohlene Schritte', checklist: 'Checkliste', questions: 'Fragen', mistakes: 'Haufige Fehler', mainRisks: 'Wichtige Risiken', noteTitle: 'HexaCyber-Hinweis:', note: 'Betrachte Sicherheitshinweise als Grundlage. Personen mit hohem Risiko sollten die Schritte an ihre Situation anpassen.' },
+  es: { published: 'Publicado', updated: 'Actualizado', inArticle: 'En este articulo', overview: 'Resumen', risks: 'Riesgos', steps: 'Pasos recomendados', checklist: 'Checklist', questions: 'Preguntas', mistakes: 'Errores comunes', mainRisks: 'Riesgos principales', noteTitle: 'Nota de HexaCyber:', note: 'Toma estos consejos como una base. Los usuarios de alto riesgo deben adaptar los pasos a su exposicion y requisitos locales.' },
+  it: { published: 'Pubblicato', updated: 'Aggiornato', inArticle: 'In questo articolo', overview: 'Panoramica', risks: 'Rischi', steps: 'Passaggi consigliati', checklist: 'Checklist', questions: 'Domande', mistakes: 'Errori comuni', mainRisks: 'Rischi principali', noteTitle: 'Nota HexaCyber:', note: 'Considera questi consigli come una base. Gli utenti ad alto rischio devono adattare i passaggi alla propria esposizione.' },
+  pt: { published: 'Publicado', updated: 'Atualizado', inArticle: 'Neste artigo', overview: 'Resumo', risks: 'Riscos', steps: 'Passos recomendados', checklist: 'Checklist', questions: 'Perguntas', mistakes: 'Erros comuns', mainRisks: 'Riscos principais', noteTitle: 'Nota HexaCyber:', note: 'Trate estes conselhos como uma base. Utilizadores de alto risco devem adaptar os passos a sua exposicao.' },
+  nl: { published: 'Gepubliceerd', updated: 'Bijgewerkt', inArticle: 'In dit artikel', overview: 'Overzicht', risks: 'Risico s', steps: 'Aanbevolen stappen', checklist: 'Checklist', questions: 'Vragen', mistakes: 'Veelgemaakte fouten', mainRisks: 'Belangrijkste risico s', noteTitle: 'HexaCyber-notitie:', note: 'Zie beveiligingsadvies als basis. Gebruikers met hoog risico moeten de stappen aanpassen aan hun eigen situatie.' },
+}[lang];
+const metadata = {
+  title: article.seo.title,
+  description: article.seo.description,
+  openGraph: { type: 'article' },
+};
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: article.description,
+  datePublished: article.date,
+  dateModified: article.updated,
+  author: { '@type': 'Organization', name: article.author },
+  publisher: { '@type': 'Organization', name: 'HexaCyber' },
+};
+---
+
+<PageLayout metadata={metadata} lang={lang}>
+  <article>
+    <header class="border-b" style="border-color: var(--hc-border)">
+      <div class="hc-shell grid gap-8 py-12 lg:grid-cols-[1fr_18rem]">
+        <div>
+          <nav class="mb-6 text-base hc-muted" aria-label="Breadcrumb">
+            <a class="hc-link" href={localizePath('/', lang)}>{t.home}</a>
+            <span> / </span>
+            <a class="hc-link" href={localizePath(`/${article.category}`, lang)}>{section.title}</a>
+          </nav>
+          <p class="hc-eyebrow">{section.title}</p>
+          <h1 class="mt-4 max-w-4xl text-4xl font-black sm:text-6xl">{article.title}</h1>
+          <p class="mt-6 max-w-3xl text-xl leading-9 hc-muted">{article.description}</p>
+          <div class="mt-6 flex flex-wrap gap-3 text-sm font-bold hc-muted">
+            <span>{article.author}</span>
+            <span>{articleUi.published} {article.date}</span>
+            <span>{articleUi.updated} {article.updated}</span>
+            <span>{article.readingTime}</span>
+            <span>{t.levels[article.level]}</span>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {article.tags.map((tag) => <span class="rounded border px-2 py-1 text-xs font-bold hc-muted" style="border-color: var(--hc-border)">{tag}</span>)}
+          </div>
+        </div>
+        <aside class="hc-card p-5">
+          <p class="hc-eyebrow">{articleUi.inArticle}</p>
+          <ol class="mt-4 space-y-2 text-sm hc-muted">
+            <li><a class="hover:text-[var(--hc-accent)]" href="#overview">{articleUi.overview}</a></li>
+            <li><a class="hover:text-[var(--hc-accent)]" href="#risks">{articleUi.risks}</a></li>
+            <li><a class="hover:text-[var(--hc-accent)]" href="#steps">{articleUi.steps}</a></li>
+            <li><a class="hover:text-[var(--hc-accent)]" href="#checklist">{articleUi.checklist}</a></li>
+            <li><a class="hover:text-[var(--hc-accent)]" href="#faq">FAQ</a></li>
+            <li><a class="hover:text-[var(--hc-accent)]" href="#sources">{t.sources}</a></li>
+          </ol>
+        </aside>
+      </div>
+    </header>
+
+    <div class="hc-shell grid gap-10 py-12 lg:grid-cols-[minmax(0,48rem)_18rem]">
+      <div class="hc-prose">
+        <section id="overview">
+          <h2>{articleUi.overview}</h2>
+          {article.content.intro.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+
+        <div class="hc-callout my-6">
+          <strong>{articleUi.noteTitle}</strong> {articleUi.note}
+        </div>
+
+        <section id="risks">
+          <h2>{articleUi.mainRisks}</h2>
+          <ul>{article.content.risks.map((item) => <li>{item}</li>)}</ul>
+        </section>
+
+        <section id="steps">
+          <h2>{articleUi.steps}</h2>
+          <ol>{article.content.steps.map((item) => <li>{item}</li>)}</ol>
+        </section>
+
+        <section>
+          <h2>{articleUi.mistakes}</h2>
+          <ul>{article.content.mistakes.map((item) => <li>{item}</li>)}</ul>
+        </section>
+
+        <section id="checklist">
+          <h2>Checklist</h2>
+          <ul>{article.content.checklist.map((item) => <li>{item}</li>)}</ul>
+        </section>
+
+        <section id="faq">
+          <h2>{articleUi.questions}</h2>
+          {article.content.faq.map(([question, answer]) => (
+            <div class="mt-5 rounded border p-4" style="border-color: var(--hc-border); background: var(--hc-card)">
+              <h3 class="text-xl font-black">{question}</h3>
+              <p>{answer}</p>
+            </div>
+          ))}
+        </section>
+
+        <section id="sources">
+          <h2>{t.sourcesReferences}</h2>
+          <ul>
+            {article.sources.map((source) => (
+              <li><a href={source.url} rel="noopener noreferrer" target="_blank">{source.label}</a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <aside class="space-y-5">
+        <div class="hc-card p-5">
+          <h2 class="text-lg font-black">{t.share}</h2>
+          <div class="mt-3 flex gap-2">
+            {['tabler:brand-x', 'tabler:brand-linkedin', 'tabler:mail'].map((icon) => (
+              <a class="rounded border p-2 hc-muted hover:text-[var(--hc-accent)]" style="border-color: var(--hc-border)" href="#" aria-label="Share">
+                <Icon name={icon} class="h-5 w-5" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div class="hc-card p-5">
+          <h2 class="text-lg font-black">{t.related}</h2>
+          <ul class="mt-3 space-y-3 text-sm hc-muted">
+            {related.map((item) => <li><a class="hover:text-[var(--hc-accent)]" href={localizePath(`/articles/${item.slug}`, lang)}>{item.title}</a></li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <section class="hc-shell pb-12">
+    <div class="grid gap-4 md:grid-cols-2">
+      {previous && <a class="hc-card p-5" href={localizePath(`/articles/${previous.slug}`, lang)}><span class="hc-muted">{t.previous}</span><h2 class="mt-2 font-black">{previous.title}</h2></a>}
+      {next && <a class="hc-card p-5" href={localizePath(`/articles/${next.slug}`, lang)}><span class="hc-muted">{t.next}</span><h2 class="mt-2 font-black">{next.title}</h2></a>}
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</PageLayout>

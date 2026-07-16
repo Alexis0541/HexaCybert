@@ -1,0 +1,49 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import { evergreenPages, getSection, sourceLibrary, type SectionKey } from '~/data/hexacyber';
+import { langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
+
+export const getStaticPaths = () =>
+  langCodes.flatMap((lang) =>
+    Object.entries(evergreenPages).flatMap(([section, pages]) => pages.map(([page]) => ({ params: { lang, section, page } })))
+  );
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const sectionKey = String(Astro.params.section) as SectionKey;
+const pageSlug = String(Astro.params.page);
+const section = getSection(lang, sectionKey);
+const page = evergreenPages[sectionKey as keyof typeof evergreenPages]?.find(([slug]) => slug === pageSlug);
+if (!page) return Astro.redirect(localizePath(`/${sectionKey}`, lang));
+const [, title, description] = page;
+---
+
+<PageLayout metadata={{ title, description }} lang={lang}>
+  <article class="hc-shell py-14">
+    <nav class="mb-6 text-base hc-muted" aria-label="Breadcrumb">
+    <a class="hc-link" href={localizePath('/', lang)}>{t.home}</a>
+      <span> / </span>
+      <a class="hc-link" href={localizePath(`/${sectionKey}`, lang)}>{section.title}</a>
+    </nav>
+    <p class="hc-eyebrow">{section.title}</p>
+    <h1 class="mt-4 max-w-4xl text-4xl font-black sm:text-6xl">{title}</h1>
+    <p class="mt-6 max-w-3xl text-xl leading-9 hc-muted">{description}</p>
+
+    <div class="hc-prose mt-10 max-w-3xl">
+      <p>{description}</p>
+      <p>{lang === 'es' ? 'Esta pagina es material educativo neutral. Evita rankings de proveedores, afirmaciones de precios y resultados de pruebas no verificables.' : 'This page is neutral educational material. It avoids vendor rankings, pricing claims and unverifiable test results.'}</p>
+      <h2>{lang === 'es' ? 'Que revisar' : 'What to review'}</h2>
+      <ul>
+        <li>{lang === 'es' ? 'Define que riesgo quieres reducir antes de elegir una herramienta o ajuste.' : 'Know which risk you are trying to reduce before choosing a tool or setting.'}</li>
+        <li>{lang === 'es' ? 'Revisa los ajustes actuales desde la interfaz oficial del producto o sistema operativo.' : 'Check current settings from the official product or operating system interface.'}</li>
+        <li>{lang === 'es' ? 'Documenta los cambios para poder revertirlos o actualizarlos mas tarde.' : 'Document changes so they can be reversed or updated later.'}</li>
+        <li>{lang === 'es' ? 'Revisa recuperacion y copias de seguridad antes de depender de una nueva configuracion.' : 'Review recovery and backup options before relying on a new setup.'}</li>
+      </ul>
+      <h2>{t.sources}</h2>
+      <ul>
+        <li><a href={sourceLibrary.nistIdentity.url} target="_blank" rel="noopener noreferrer">{sourceLibrary.nistIdentity.label}</a></li>
+        <li><a href={sourceLibrary.ncscSmallOrg.url} target="_blank" rel="noopener noreferrer">{sourceLibrary.ncscSmallOrg.label}</a></li>
+      </ul>
+    </div>
+  </article>
+</PageLayout>

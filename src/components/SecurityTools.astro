@@ -1,0 +1,478 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getToolCatalog } from '~/data/hexacyber';
+import type { Lang } from '~/utils/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const toolCatalog = getToolCatalog(lang);
+const copy = {
+  en: {
+    calloutTitle: 'Educational local tools.',
+    calloutText: 'Passwords, URLs and pasted headers are processed in your browser. These tools help you reason about risk, but they do not guarantee security.',
+    passwordGenerator: 'Password generator',
+    length: 'Length',
+    generate: 'Generate',
+    strengthMeter: 'Strength meter',
+    typeLocally: 'Type locally',
+    nothingSent: 'Nothing is sent to a server.',
+    passphraseGenerator: 'Passphrase generator',
+    generatePhrase: 'Generate phrase',
+    entropyCalculator: 'Entropy calculator',
+    lower: 'lower',
+    upper: 'upper',
+    digits: 'digits',
+    symbols: 'symbols',
+    hashGenerator: 'Hash generator',
+    nonSensitiveText: 'Non-sensitive text',
+    uuidCodes: 'UUID and random codes',
+    generateUuid: 'Generate UUID',
+    generateCodes: 'Generate codes',
+    securityChecklist: 'Security checklist',
+    privacyChecklist: 'Privacy checklist',
+    urlAnalyzer: 'URL analyzer',
+    headerInspector: 'Email header inspector',
+    pasteHeaders: 'Paste headers manually',
+    crackEstimator: 'Crack-time estimator',
+    recoveryCodes: 'Recovery codes',
+    generatePrintable: 'Generate printable codes',
+    evaluator: 'Personal security evaluator',
+    comparator: 'Authentication comparator',
+  },
+  es: {
+    calloutTitle: 'Herramientas locales educativas.',
+    calloutText: 'Contrasenas, URL y cabeceras pegadas se procesan en tu navegador. Ayudan a razonar sobre riesgos, pero no garantizan seguridad.',
+    passwordGenerator: 'Generador de contrasenas',
+    length: 'Longitud',
+    generate: 'Generar',
+    strengthMeter: 'Medidor de fortaleza',
+    typeLocally: 'Escribe localmente',
+    nothingSent: 'No se envia nada a un servidor.',
+    passphraseGenerator: 'Generador de frases',
+    generatePhrase: 'Generar frase',
+    entropyCalculator: 'Calculadora de entropia',
+    lower: 'minusculas',
+    upper: 'mayusculas',
+    digits: 'digitos',
+    symbols: 'simbolos',
+    hashGenerator: 'Generador hash',
+    nonSensitiveText: 'Texto no sensible',
+    uuidCodes: 'UUID y codigos aleatorios',
+    generateUuid: 'Generar UUID',
+    generateCodes: 'Generar codigos',
+    securityChecklist: 'Lista de seguridad',
+    privacyChecklist: 'Lista de privacidad',
+    urlAnalyzer: 'Analizador de URL',
+    headerInspector: 'Inspector de cabeceras',
+    pasteHeaders: 'Pega cabeceras manualmente',
+    crackEstimator: 'Estimador de descifrado',
+    recoveryCodes: 'Codigos de recuperacion',
+    generatePrintable: 'Generar codigos imprimibles',
+    evaluator: 'Evaluador personal',
+    comparator: 'Comparador de autenticacion',
+  },
+  fr: {
+    calloutTitle: 'Outils locaux educatifs.',
+    calloutText: 'Les mots de passe, URL et en-tetes colles sont traites dans votre navigateur.',
+    passwordGenerator: 'Generateur de mots de passe',
+    length: 'Longueur',
+    generate: 'Generer',
+    strengthMeter: 'Mesure de robustesse',
+    typeLocally: 'Saisir localement',
+    nothingSent: 'Rien n est envoye a un serveur.',
+    passphraseGenerator: 'Generateur de phrase',
+    generatePhrase: 'Generer une phrase',
+    entropyCalculator: 'Calculateur d entropie',
+    lower: 'minuscules',
+    upper: 'majuscules',
+    digits: 'chiffres',
+    symbols: 'symboles',
+    hashGenerator: 'Generateur de hash',
+    nonSensitiveText: 'Texte non sensible',
+    uuidCodes: 'UUID et codes aleatoires',
+    generateUuid: 'Generer UUID',
+    generateCodes: 'Generer codes',
+    securityChecklist: 'Liste de securite',
+    privacyChecklist: 'Liste confidentialite',
+    urlAnalyzer: 'Analyseur URL',
+    headerInspector: 'Inspecteur d en-tetes',
+    pasteHeaders: 'Coller les en-tetes',
+    crackEstimator: 'Estimation de cassage',
+    recoveryCodes: 'Codes de secours',
+    generatePrintable: 'Generer codes imprimables',
+    evaluator: 'Evaluateur personnel',
+    comparator: 'Comparateur d authentification',
+  },
+  de: {
+    calloutTitle: 'Lokale Lern-Tools.',
+    calloutText: 'Passworter, URLs und eingefugte Header werden im Browser verarbeitet.',
+    passwordGenerator: 'Passwortgenerator',
+    length: 'Lange',
+    generate: 'Generieren',
+    strengthMeter: 'Starkemesser',
+    typeLocally: 'Lokal eingeben',
+    nothingSent: 'Nichts wird an einen Server gesendet.',
+    passphraseGenerator: 'Passphrasen-Generator',
+    generatePhrase: 'Phrase generieren',
+    entropyCalculator: 'Entropie-Rechner',
+    lower: 'klein',
+    upper: 'gross',
+    digits: 'Ziffern',
+    symbols: 'Symbole',
+    hashGenerator: 'Hash-Generator',
+    nonSensitiveText: 'Nicht sensibler Text',
+    uuidCodes: 'UUID und Zufallscodes',
+    generateUuid: 'UUID generieren',
+    generateCodes: 'Codes generieren',
+    securityChecklist: 'Sicherheitscheckliste',
+    privacyChecklist: 'Datenschutzcheckliste',
+    urlAnalyzer: 'URL-Analyse',
+    headerInspector: 'E-Mail-Header-Prufung',
+    pasteHeaders: 'Header manuell einfugen',
+    crackEstimator: 'Knackzeit-Schatzung',
+    recoveryCodes: 'Wiederherstellungscodes',
+    generatePrintable: 'Druckbare Codes generieren',
+    evaluator: 'Personlicher Sicherheitscheck',
+    comparator: 'Authentifizierungsvergleich',
+  },
+  it: {
+    calloutTitle: 'Strumenti locali educativi.',
+    calloutText: 'Password, URL e intestazioni incollate vengono elaborate nel browser.',
+    passwordGenerator: 'Generatore password',
+    length: 'Lunghezza',
+    generate: 'Genera',
+    strengthMeter: 'Misuratore robustezza',
+    typeLocally: 'Scrivi localmente',
+    nothingSent: 'Nulla viene inviato a un server.',
+    passphraseGenerator: 'Generatore frase segreta',
+    generatePhrase: 'Genera frase',
+    entropyCalculator: 'Calcolatore entropia',
+    lower: 'minuscole',
+    upper: 'maiuscole',
+    digits: 'cifre',
+    symbols: 'simboli',
+    hashGenerator: 'Generatore hash',
+    nonSensitiveText: 'Testo non sensibile',
+    uuidCodes: 'UUID e codici casuali',
+    generateUuid: 'Genera UUID',
+    generateCodes: 'Genera codici',
+    securityChecklist: 'Checklist sicurezza',
+    privacyChecklist: 'Checklist privacy',
+    urlAnalyzer: 'Analizzatore URL',
+    headerInspector: 'Ispettore intestazioni email',
+    pasteHeaders: 'Incolla intestazioni',
+    crackEstimator: 'Stima tempo di cracking',
+    recoveryCodes: 'Codici di recupero',
+    generatePrintable: 'Genera codici stampabili',
+    evaluator: 'Valutatore personale',
+    comparator: 'Confronto autenticazione',
+  },
+  pt: {
+    calloutTitle: 'Ferramentas locais educativas.',
+    calloutText: 'Palavras-passe, URLs e cabecalhos colados sao processados no navegador.',
+    passwordGenerator: 'Gerador de palavras-passe',
+    length: 'Comprimento',
+    generate: 'Gerar',
+    strengthMeter: 'Medidor de forca',
+    typeLocally: 'Escreva localmente',
+    nothingSent: 'Nada e enviado para um servidor.',
+    passphraseGenerator: 'Gerador de frase-passe',
+    generatePhrase: 'Gerar frase',
+    entropyCalculator: 'Calculadora de entropia',
+    lower: 'minusculas',
+    upper: 'maiusculas',
+    digits: 'digitos',
+    symbols: 'simbolos',
+    hashGenerator: 'Gerador hash',
+    nonSensitiveText: 'Texto nao sensivel',
+    uuidCodes: 'UUID e codigos aleatorios',
+    generateUuid: 'Gerar UUID',
+    generateCodes: 'Gerar codigos',
+    securityChecklist: 'Lista de seguranca',
+    privacyChecklist: 'Lista de privacidade',
+    urlAnalyzer: 'Analisador de URL',
+    headerInspector: 'Inspetor de cabecalhos',
+    pasteHeaders: 'Cole cabecalhos manualmente',
+    crackEstimator: 'Estimador de quebra',
+    recoveryCodes: 'Codigos de recuperacao',
+    generatePrintable: 'Gerar codigos imprimiveis',
+    evaluator: 'Avaliador pessoal',
+    comparator: 'Comparador de autenticacao',
+  },
+  nl: {
+    calloutTitle: 'Lokale educatieve tools.',
+    calloutText: 'Wachtwoorden, URL s en geplakte headers worden in je browser verwerkt.',
+    passwordGenerator: 'Wachtwoordgenerator',
+    length: 'Lengte',
+    generate: 'Genereren',
+    strengthMeter: 'Sterktemeter',
+    typeLocally: 'Lokaal typen',
+    nothingSent: 'Er wordt niets naar een server gestuurd.',
+    passphraseGenerator: 'Wachtzin-generator',
+    generatePhrase: 'Zin genereren',
+    entropyCalculator: 'Entropiecalculator',
+    lower: 'klein',
+    upper: 'groot',
+    digits: 'cijfers',
+    symbols: 'symbolen',
+    hashGenerator: 'Hashgenerator',
+    nonSensitiveText: 'Niet-gevoelige tekst',
+    uuidCodes: 'UUID en willekeurige codes',
+    generateUuid: 'UUID genereren',
+    generateCodes: 'Codes genereren',
+    securityChecklist: 'Beveiligingschecklist',
+    privacyChecklist: 'Privacychecklist',
+    urlAnalyzer: 'URL-analyse',
+    headerInspector: 'E-mailheader-inspectie',
+    pasteHeaders: 'Headers handmatig plakken',
+    crackEstimator: 'Kraaktijdschatting',
+    recoveryCodes: 'Herstelcodes',
+    generatePrintable: 'Printbare codes genereren',
+    evaluator: 'Persoonlijke beveiligingsscore',
+    comparator: 'Authenticatievergelijker',
+  },
+} as const;
+const c = copy[lang] ?? copy.en;
+
+const securityChecklist = ['Update devices', 'Enable MFA', 'Use unique passwords', 'Back up files', 'Review app permissions', 'Store recovery codes'];
+const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable unused extensions', 'Check social visibility', 'Remove unused accounts', 'Review cloud sharing'];
+---
+
+<div class="hc-callout mb-6">
+  <strong>{c.calloutTitle}</strong> {c.calloutText}
+</div>
+
+<section class="grid gap-4 lg:grid-cols-3">
+  <div class="hc-card p-5 lg:col-span-2">
+    <h3 class="flex items-center gap-2 text-xl font-black"><Icon name="tabler:key" class="h-6 w-6 text-[var(--hc-accent)]" />{c.passwordGenerator}</h3>
+    <div class="mt-4 flex flex-wrap items-center gap-3">
+      <label class="text-base hc-muted">{c.length} <input class="hc-input ml-2 inline-block w-24" type="number" min="12" max="64" value="20" data-password-length /></label>
+      <button class="hc-button" type="button" data-generate-password>{c.generate}</button>
+    </div>
+    <output class="mt-4 block min-h-12 rounded p-3 font-mono text-sm" style="background: var(--hc-bg); color: var(--hc-lime)" data-password-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.strengthMeter}</h3>
+    <input class="hc-input mt-4" type="password" placeholder={c.typeLocally} data-strength-input />
+    <div class="mt-4 h-3 rounded" style="background: var(--hc-border)"><div class="h-3 rounded transition-all" style="width: 0%; background: var(--hc-accent)" data-strength-bar></div></div>
+    <p class="mt-3 text-base hc-muted" data-strength-text>{c.nothingSent}</p>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.passphraseGenerator}</h3>
+    <button class="hc-button mt-4" type="button" data-generate-passphrase>{c.generatePhrase}</button>
+    <output class="mt-4 block min-h-12 rounded p-3 font-mono text-sm" style="background: var(--hc-bg); color: var(--hc-lime)" data-passphrase-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.entropyCalculator}</h3>
+    <input class="hc-input mt-4" type="number" min="1" max="128" value="16" data-entropy-length />
+    <label class="mt-3 flex items-center gap-2 hc-muted"><input type="checkbox" checked data-entropy-lower /> {c.lower}</label>
+    <label class="flex items-center gap-2 hc-muted"><input type="checkbox" checked data-entropy-upper /> {c.upper}</label>
+    <label class="flex items-center gap-2 hc-muted"><input type="checkbox" checked data-entropy-digits /> {c.digits}</label>
+    <label class="flex items-center gap-2 hc-muted"><input type="checkbox" checked data-entropy-symbols /> {c.symbols}</label>
+    <output class="mt-3 block font-bold text-[var(--hc-accent)]" data-entropy-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.hashGenerator}</h3>
+    <textarea class="hc-input mt-4 min-h-24" data-hash-input placeholder={c.nonSensitiveText}></textarea>
+    <button class="hc-button mt-3" type="button" data-hash-button>SHA-256</button>
+    <output class="mt-3 block break-all font-mono text-sm hc-muted" data-hash-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.uuidCodes}</h3>
+    <button class="hc-button mt-4" type="button" data-uuid-button>{c.generateUuid}</button>
+    <button class="hc-button hc-button-secondary mt-4" type="button" data-code-button>{c.generateCodes}</button>
+    <output class="mt-3 block whitespace-pre-wrap font-mono text-sm hc-muted" data-random-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.securityChecklist}</h3>
+    <ul class="mt-4 space-y-3">
+      {securityChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-checklist-item />{item}</label></li>)}
+    </ul>
+    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-checklist-score>0 of {securityChecklist.length} complete</p>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.privacyChecklist}</h3>
+    <ul class="mt-4 space-y-3">
+      {privacyChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-privacy-item />{item}</label></li>)}
+    </ul>
+    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-privacy-score>0 of {privacyChecklist.length} complete</p>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.urlAnalyzer}</h3>
+    <input class="hc-input mt-4" data-url-input placeholder="https://example.com/path?x=1" />
+    <output class="mt-3 block whitespace-pre-wrap text-sm hc-muted" data-url-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.headerInspector}</h3>
+    <textarea class="hc-input mt-4 min-h-28" data-header-input placeholder={c.pasteHeaders}></textarea>
+    <output class="mt-3 block whitespace-pre-wrap text-sm hc-muted" data-header-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.crackEstimator}</h3>
+    <input class="hc-input mt-4" type="password" data-crack-input placeholder={c.typeLocally} />
+    <output class="mt-3 block text-sm hc-muted" data-crack-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.recoveryCodes}</h3>
+    <button class="hc-button mt-4" type="button" data-recovery-button>{c.generatePrintable}</button>
+    <output class="mt-3 block whitespace-pre-wrap font-mono text-sm hc-muted" data-recovery-output></output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.evaluator}</h3>
+    {['MFA on email', 'Device lock', 'Backups', 'Password manager', 'Updated browser'].map((item) => (
+      <label class="mt-3 flex items-center gap-3 hc-muted"><input type="checkbox" data-eval-item />{item}</label>
+    ))}
+    <output class="mt-3 block font-bold text-[var(--hc-accent)]" data-eval-output>Score: 0%</output>
+  </div>
+
+  <div class="hc-card p-5">
+    <h3 class="text-xl font-black">{c.comparator}</h3>
+    <select class="hc-input mt-4" data-auth-select>
+      <option value="sms">SMS code</option>
+      <option value="app">Authenticator app</option>
+      <option value="passkey">Passkey</option>
+      <option value="key">Security key</option>
+    </select>
+    <output class="mt-3 block text-sm hc-muted" data-auth-output></output>
+  </div>
+</section>
+
+<section class="mt-8 grid gap-3 md:grid-cols-3">
+  {toolCatalog.map(([slug, title, description]) => (
+    <a class="hc-card-soft p-4 hover:border-[var(--hc-accent)]" href={`#${slug}`}>
+      <h3 class="font-black">{title}</h3>
+      <p class="mt-2 text-sm hc-muted">{description}</p>
+    </a>
+  ))}
+</section>
+
+<script>
+  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*?';
+  const words = ['anchor', 'signal', 'vault', 'forest', 'orbit', 'silver', 'candle', 'matrix', 'harbor', 'pixel', 'river', 'quiet'];
+  const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
+  const randomBytes = (length) => {
+    const bytes = new Uint8Array(length);
+    crypto.getRandomValues(bytes);
+    return bytes;
+  };
+  const code = () => Array.from(randomBytes(4), (byte) => alphabet[byte % alphabet.length]).join('');
+
+  const updateChecklist = (selector, output) => {
+    const items = Array.from(document.querySelectorAll(selector));
+    const done = items.filter((item) => item instanceof HTMLInputElement && item.checked).length;
+    const score = document.querySelector(output);
+    if (score) score.textContent = `${done} of ${items.length} complete`;
+  };
+
+  const scorePassword = (value) => {
+    let score = 0;
+    if (value.length >= 12) score += 25;
+    if (value.length >= 16) score += 15;
+    if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score += 20;
+    if (/\d/.test(value)) score += 20;
+    if (/[^A-Za-z0-9]/.test(value)) score += 20;
+    return Math.min(score, 100);
+  };
+
+  const entropy = () => {
+    const length = Number(document.querySelector('[data-entropy-length]')?.value || 0);
+    let pool = 0;
+    if (document.querySelector('[data-entropy-lower]')?.checked) pool += 26;
+    if (document.querySelector('[data-entropy-upper]')?.checked) pool += 26;
+    if (document.querySelector('[data-entropy-digits]')?.checked) pool += 10;
+    if (document.querySelector('[data-entropy-symbols]')?.checked) pool += 28;
+    const bits = pool ? Math.log2(pool) * length : 0;
+    document.querySelector('[data-entropy-output]').textContent = `${bits.toFixed(1)} bits estimated`;
+  };
+
+  const analyzeUrl = () => {
+    const value = document.querySelector('[data-url-input]')?.value;
+    const out = document.querySelector('[data-url-output]');
+    try {
+      const url = new URL(value);
+      out.textContent = `Protocol: ${url.protocol}\nHost: ${url.hostname}\nPath: ${url.pathname}\nQuery: ${url.search || 'none'}\nWarning signs: ${url.protocol !== 'https:' ? 'not HTTPS' : 'none obvious'}`;
+    } catch {
+      out.textContent = value ? 'Not a valid absolute URL.' : '';
+    }
+  };
+
+  document.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest('[data-generate-password]')) {
+      const length = Math.max(12, Math.min(64, Number(document.querySelector('[data-password-length]')?.value || 20)));
+      document.querySelector('[data-password-output]').textContent = Array.from({ length }, () => randomItem(alphabet)).join('');
+    }
+    if (target.closest('[data-generate-passphrase]')) {
+      document.querySelector('[data-passphrase-output]').textContent = Array.from({ length: 5 }, () => randomItem(words)).join('-');
+    }
+    if (target.closest('[data-hash-button]')) {
+      const text = document.querySelector('[data-hash-input]')?.value || '';
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      document.querySelector('[data-hash-output]').textContent = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
+    }
+    if (target.closest('[data-uuid-button]')) document.querySelector('[data-random-output]').textContent = crypto.randomUUID();
+    if (target.closest('[data-code-button]')) document.querySelector('[data-random-output]').textContent = Array.from({ length: 8 }, code).join('\\n');
+    if (target.closest('[data-recovery-button]')) document.querySelector('[data-recovery-output]').textContent = Array.from({ length: 10 }, () => `${code()}-${code()}-${code()}`).join('\\n');
+  });
+
+  document.addEventListener('input', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement)) return;
+    if (target.matches('[data-strength-input]')) {
+      const score = scorePassword(target.value);
+      const bar = document.querySelector('[data-strength-bar]');
+      if (bar instanceof HTMLElement) bar.style.width = `${score}%`;
+      document.querySelector('[data-strength-text]').textContent = score < 40 ? 'Weak: use a longer unique password.' : score < 75 ? 'Moderate: add length and variety.' : 'Strong baseline: keep it unique and stored safely.';
+    }
+    if (target.matches('[data-checklist-item]')) updateChecklist('[data-checklist-item]', '[data-checklist-score]');
+    if (target.matches('[data-privacy-item]')) updateChecklist('[data-privacy-item]', '[data-privacy-score]');
+    if (target.matches('[data-entropy-length], [data-entropy-lower], [data-entropy-upper], [data-entropy-digits], [data-entropy-symbols]')) entropy();
+    if (target.matches('[data-url-input]')) analyzeUrl();
+    if (target.matches('[data-header-input]')) {
+      const value = target.value;
+      const interesting = ['from:', 'to:', 'subject:', 'date:', 'received:', 'authentication-results:', 'spf=', 'dkim=', 'dmarc='];
+      document.querySelector('[data-header-output]').textContent = value
+        .split('\\n')
+        .filter((line) => interesting.some((needle) => line.toLowerCase().includes(needle)))
+        .slice(0, 12)
+        .join('\\n');
+    }
+    if (target.matches('[data-crack-input]')) {
+      const score = scorePassword(target.value);
+      document.querySelector('[data-crack-output]').textContent = score < 40 ? 'Educational estimate: very weak against guessing.' : score < 75 ? 'Educational estimate: moderate, but uniqueness still matters.' : 'Educational estimate: stronger baseline if unique and not exposed.';
+    }
+    if (target.matches('[data-eval-item]')) {
+      const items = Array.from(document.querySelectorAll('[data-eval-item]'));
+      const done = items.filter((item) => item instanceof HTMLInputElement && item.checked).length;
+      document.querySelector('[data-eval-output]').textContent = `Score: ${Math.round((done / items.length) * 100)}%`;
+    }
+    if (target.matches('[data-auth-select]')) {
+      const map = {
+        sms: 'Better than no MFA, but vulnerable to SIM swap and message interception.',
+        app: 'Good baseline for many users; store backup codes separately.',
+        passkey: 'Phishing-resistant when supported, with recovery planning required.',
+        key: 'Very strong for high-value accounts, but keep a spare key.',
+      };
+      document.querySelector('[data-auth-output]').textContent = map[target.value];
+    }
+  });
+
+  entropy();
+  document.querySelector('[data-generate-password]')?.dispatchEvent(new Event('click', { bubbles: true }));
+</script>
