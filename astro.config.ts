@@ -24,15 +24,26 @@ const githubRepo = githubRepository?.split('/')[1];
 const githubPagesSite = githubOwner ? `https://${githubOwner}.github.io` : undefined;
 const githubPagesBase =
   githubOwner && githubRepo && githubRepo !== `${githubOwner}.github.io` ? `/${githubRepo}` : '/';
+const normalizeBase = (value?: string) => {
+  if (!value || value === '/') return '/';
+
+  return `/${value.replace(/^\/+|\/+$/g, '')}`;
+};
+const configuredSite = process.env.SITE ?? githubPagesSite ?? 'https://hexacyber.example';
+const configuredBase = normalizeBase(process.env.BASE_PATH ?? githubPagesBase);
+const shouldCompress = process.env.DISABLE_COMPRESS !== 'true';
 
 const hasExternalScripts = false;
 const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  site: process.env.SITE ?? githubPagesSite ?? 'https://hexacyber.example',
-  base: process.env.BASE_PATH ?? githubPagesBase,
+  site: configuredSite,
+  base: configuredBase,
   output: 'static',
+  build: {
+    assetsPrefix: configuredBase === '/' ? undefined : configuredBase,
+  },
 
   integrations: [
     sitemap(),
@@ -60,18 +71,22 @@ export default defineConfig({
       })
     ),
 
-    compress({
-      CSS: true,
-      HTML: {
-        'html-minifier-terser': {
-          removeAttributeQuotes: false,
-        },
-      },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
-      Logger: 1,
-    }),
+    ...(shouldCompress
+      ? [
+          compress({
+            CSS: true,
+            HTML: {
+              'html-minifier-terser': {
+                removeAttributeQuotes: false,
+              },
+            },
+            Image: false,
+            JavaScript: true,
+            SVG: false,
+            Logger: 1,
+          }),
+        ]
+      : []),
 
     storefront({
       config: './src/config.yaml',

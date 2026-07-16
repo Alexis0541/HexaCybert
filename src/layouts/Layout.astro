@@ -16,6 +16,7 @@ import { ClientRouter } from 'astro:transitions';
 import type { MetaData as MetaDataType } from '~/types';
 import type { Lang } from '~/utils/i18n';
 import { alternateLangPath, getLangFromUrl, langCodes } from '~/utils/i18n';
+import { getCanonical } from '~/utils/permalinks';
 
 export interface Props {
   metadata?: MetaDataType;
@@ -34,8 +35,8 @@ const language = lang;
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
-    {langCodes.map((code) => <link rel="alternate" hreflang={code} href={new URL(alternateLangPath(Astro.url.pathname, code), Astro.site)} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(alternateLangPath(Astro.url.pathname, 'en'), Astro.site)} />
+    {langCodes.map((code) => <link rel="alternate" hreflang={code} href={getCanonical(alternateLangPath(Astro.url.pathname, code))} />)}
+    <link rel="alternate" hreflang="x-default" href={getCanonical(alternateLangPath(Astro.url.pathname, 'en'))} />
     <SiteVerification />
     <Analytics />
 

@@ -6,7 +6,7 @@ import type { SEOProps } from 'astro-seo';
 
 import { SITE, METADATA, I18N } from 'storefront:config';
 import type { MetaData, MetaDataOpenGraph } from '~/types';
-import { getCanonical } from '~/utils/permalinks';
+import { getCanonical, SITE_URL } from '~/utils/permalinks';
 
 import { adaptOpenGraphImages } from '~/utils/images';
 
@@ -36,7 +36,7 @@ const mergedOg: MetaDataOpenGraph = merge(
   { url: canonical, ...openGraph }
 );
 
-const adaptedOg = await adaptOpenGraphImages(mergedOg, Astro.site);
+const adaptedOg = await adaptOpenGraphImages(mergedOg, new URL(SITE_URL));
 
 const firstImage = adaptedOg?.images?.[0];
 

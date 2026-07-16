@@ -13,7 +13,20 @@ const createPath = (...params: string[]) => {
   return '/' + paths + (SITE.trailingSlash && paths ? '/' : '');
 };
 
-const BASE_PATHNAME = SITE.base || '/';
+const configuredSite = typeof process !== 'undefined' ? process.env.SITE : undefined;
+const configuredBasePath = typeof process !== 'undefined' ? process.env.BASE_PATH : undefined;
+export const SITE_URL = configuredSite || SITE.site;
+const BASE_PATHNAME = configuredBasePath || SITE.base || '/';
+const withConfiguredBase = (path = '') => {
+  const base = trimSlash(BASE_PATHNAME);
+  const currentPath = trimSlash(path);
+
+  if (base && (currentPath === base || currentPath.startsWith(`${base}/`))) {
+    return createPath(currentPath);
+  }
+
+  return createPath(base, currentPath);
+};
 
 export const cleanSlug = (text = '') =>
   trimSlash(text)
@@ -29,7 +42,7 @@ export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
-  const url = String(new URL(path, SITE.site));
+  const url = String(new URL(withConfiguredBase(path), SITE_URL));
   if (SITE.trailingSlash == false && path && url.endsWith('/')) {
     return url.slice(0, -1);
   } else if (SITE.trailingSlash == true && path && !url.endsWith('/')) {
