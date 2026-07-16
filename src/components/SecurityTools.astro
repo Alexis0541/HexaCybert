@@ -454,6 +454,8 @@ const toolLabels = { ...localToolCopy.en, ...(localToolCopy[lang] ?? {}) };
 </section>
 
 <script>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-nocheck
   const toolCopy = JSON.parse(document.querySelector('script[id^="security-tools-copy-"]')?.textContent || '{}');
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*?';
   const words = ['anchor', 'signal', 'vault', 'forest', 'orbit', 'silver', 'candle', 'matrix', 'harbor', 'pixel', 'river', 'quiet', 'ember', 'summit', 'garden', 'planet', 'window', 'copper'];

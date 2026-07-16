@@ -5,7 +5,7 @@ import { langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
 
 export const getStaticPaths = () =>
   langCodes.flatMap((lang) =>
-    Object.entries(evergreenPages).flatMap(([section, pages]) => pages.map(([page]) => ({ params: { lang, section, page } })))
+    Object.entries(evergreenPages).flatMap(([section, pages]) => (pages ?? []).map(([page]) => ({ params: { lang, section, page } })))
   );
 
 const lang = Astro.params.lang as Lang;
@@ -13,7 +13,8 @@ const t = ui[lang];
 const sectionKey = String(Astro.params.section) as SectionKey;
 const pageSlug = String(Astro.params.page);
 const section = getSection(lang, sectionKey);
-const page = evergreenPages[sectionKey as keyof typeof evergreenPages]?.find(([slug]) => slug === pageSlug);
+const pages = evergreenPages[sectionKey];
+const page = pages?.find(([slug]) => slug === pageSlug);
 if (!page) return Astro.redirect(localizePath(`/${sectionKey}`, lang));
 const [, title, description] = page;
 ---

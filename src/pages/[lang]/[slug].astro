@@ -3,12 +3,12 @@ import { Icon } from 'astro-icon/components';
 import PageLayout from '~/layouts/PageLayout.astro';
 import ArticleCard from '~/components/ArticleCard.astro';
 import SecurityTools from '~/components/SecurityTools.astro';
-import { adminCountry, contactEmail, contactMailto, getArticles, getSection, legalPages, resourceGroups, sectionOrder, type SectionKey } from '~/data/hexacybert';
+import { adminCountry, contactEmail, contactMailto, getArticles, getResourceGroups, getSection, legalPages, sectionOrder, type SectionKey } from '~/data/hexacybert';
 import { langCodes, localizePath, ui, type Lang } from '~/utils/i18n';
 
 export const getStaticPaths = () =>
   langCodes.flatMap((lang) =>
-    [...sectionOrder, 'about', 'contact', 'search', ...Object.keys(legalPages)].map((slug) => ({ params: { lang, slug } }))
+    [...sectionOrder, 'about', 'a-propos', 'contact', 'search', ...Object.keys(legalPages)].map((slug) => ({ params: { lang, slug } }))
   );
 
 const lang = Astro.params.lang as Lang;
@@ -20,11 +20,12 @@ const section = isSection ? getSection(lang, slug as SectionKey) : undefined;
 const legal = legalPages[slug as keyof typeof legalPages];
 const legalLang = (['en', 'fr', 'es'].includes(lang) ? lang : 'en') as 'en' | 'fr' | 'es';
 const localizedLegalTitle = legal?.title[legalLang];
-const title = section?.title ?? localizedLegalTitle ?? (slug === 'about' ? t.aboutTitle : slug === 'contact' ? t.contactTitle : t.searchTitle);
+const isAbout = slug === 'about' || slug === 'a-propos';
+const title = section?.title ?? localizedLegalTitle ?? (isAbout ? t.aboutTitle : slug === 'contact' ? t.contactTitle : t.searchTitle);
 const description =
   section?.description ??
   legal?.description[legalLang] ??
-  (slug === 'about'
+  (isAbout
     ? t.aboutDescription
     : slug === 'contact'
       ? t.contactDescription
@@ -38,6 +39,7 @@ const filtered = isSection
   : articles;
 const levels = ['Beginner', 'Intermediate', 'Advanced'] as const;
 const searchItems = articles.map((article) => ({ ...article, url: localizePath(`/articles/${article.slug}`, lang) }));
+const resourceGroups = getResourceGroups(lang);
 const aboutBlocks = {
   en: [
     'HexaCybert publishes practical cybersecurity, privacy, VPN, antivirus, password manager and device security guidance for everyday readers.',
@@ -45,9 +47,10 @@ const aboutBlocks = {
     'When we compare tools, we explain trade-offs such as trust model, recovery, compatibility, cost, usability and privacy limits. Security advice is written as a baseline that readers can adapt to their own risk level.',
   ],
   fr: [
-    'HexaCybert publie des guides pratiques sur la cybersecurite, la confidentialite, les VPN, les antivirus, les gestionnaires de mots de passe et la protection des appareils.',
-    'Le site est administre depuis la France et suit des regles editoriales prudentes : pas de tests inventes, pas de faux prix, pas de promesses d anonymat non verifiees et pas de pression affiliee cachee.',
-    'Dans les comparatifs, nous expliquons les compromis : modele de confiance, recuperation, compatibilite, cout, facilite d usage et limites de confidentialite.',
+    'HexaCybert est un projet éditorial indépendant administré depuis la France. Le site publie des guides pratiques sur la cybersécurité, la confidentialité, les VPN, les antivirus, les gestionnaires de mots de passe et la protection des appareils.',
+    'La ligne éditoriale est volontairement prudente : pas de tests inventés, pas de faux prix, pas de promesses d’anonymat non vérifiées et pas de pression affiliée cachée.',
+    'Dans les comparatifs, nous expliquons les compromis : modèle de confiance, récupération, compatibilité, coût, facilité d’usage, limites de confidentialité et conditions qui peuvent changer.',
+    'Pour toute correction, question éditoriale ou demande de confidentialité, le contact public est hexacybertprivate@gmail.com.',
   ],
   es: [
     'HexaCybert publica guias practicas sobre ciberseguridad, privacidad, VPN, antivirus, gestores de contrasenas y proteccion de dispositivos.',
@@ -57,7 +60,7 @@ const aboutBlocks = {
 } as const;
 const contactBlocks = {
   en: ['For editorial questions, corrections, privacy requests or security resource suggestions, contact HexaCybert by email.', `Administration country: ${adminCountry.en}.`],
-  fr: ['Pour les questions editoriales, corrections, demandes de confidentialite ou suggestions de ressources, contactez HexaCybert par email.', `Pays d administration : ${adminCountry.fr}.`],
+  fr: ['Pour les questions éditoriales, corrections, demandes de confidentialité ou suggestions de ressources, contactez HexaCybert par e-mail.', `Pays d’administration : ${adminCountry.fr}.`, 'HexaCybert ne publie pas d’adresse postale, de numéro fiscal ou de relation commerciale qui ne serait pas vérifiable publiquement.'],
   es: ['Para preguntas editoriales, correcciones, solicitudes de privacidad o sugerencias de recursos de seguridad, contacta con HexaCybert por correo.', `Pais de administracion: ${adminCountry.es}.`],
 } as const;
 ---
@@ -166,7 +169,7 @@ const contactBlocks = {
     </script>
   )}
 
-  {slug === 'about' && (
+  {isAbout && (
     <section class="hc-shell hc-section">
       <div class="hc-prose max-w-4xl">
         {aboutBlocks[legalLang].map((paragraph) => <p>{paragraph}</p>)}

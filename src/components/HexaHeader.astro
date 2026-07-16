@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
-import { getSection, sectionOrder } from '~/data/hexacybert';
+import { getSection } from '~/data/hexacybert';
 import type { Lang } from '~/utils/i18n';
 import { alternateLangPath, languages, localizePath, ui } from '~/utils/i18n';
 
@@ -13,7 +13,7 @@ interface Props {
 const { lang, currentPath } = Astro.props;
 const t = ui[lang];
 const labelFor = (key: string) => t[`nav${key.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join('')}` as keyof typeof t] ?? key;
-const primary = ['guides', 'privacy-center', 'password-managers', 'comparisons', 'tools', 'news'];
+const primary = ['guides', 'vpn', 'privacy-center', 'password-managers', 'comparisons', 'tools', 'news'];
 const secondary = ['cybersecurity', 'device-security', 'wifi-security', 'resources'];
 ---
 

@@ -12,6 +12,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "audit:content": "node scripts/content-audit.mjs",
     "check": "npm run check:framework && npm run check:eslint && npm run check:prettier",
     "check:framework": "astro check",
     "check:eslint": "eslint .",
