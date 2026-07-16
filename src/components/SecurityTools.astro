@@ -237,16 +237,107 @@ const copy = {
 } as const;
 const c = copy[lang] ?? copy.en;
 
-const securityChecklist = ['Update devices', 'Enable MFA', 'Use unique passwords', 'Back up files', 'Review app permissions', 'Store recovery codes'];
-const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable unused extensions', 'Check social visibility', 'Remove unused accounts', 'Review cloud sharing'];
+const localToolCopy = {
+  en: {
+    securityChecklist: ['Update devices', 'Enable MFA', 'Use unique passwords', 'Back up files', 'Review app permissions', 'Store recovery codes'],
+    privacyChecklist: ['Limit location access', 'Review cookies', 'Disable unused extensions', 'Check social visibility', 'Remove unused accounts', 'Review cloud sharing'],
+    evaluatorItems: ['MFA on email', 'Device lock', 'Backups', 'Password manager', 'Updated browser'],
+    authOptions: { sms: 'SMS code', app: 'Authenticator app', passkey: 'Passkey', key: 'Security key' },
+    complete: 'complete',
+    of: 'of',
+    weak: 'Weak: use a longer unique password.',
+    moderate: 'Moderate: add length and variety.',
+    strong: 'Strong baseline: keep it unique and stored safely.',
+    bits: 'estimated bits',
+    noQuery: 'none',
+    noWarnings: 'none obvious',
+    invalidUrl: 'Not a valid absolute URL.',
+    notHttps: 'not HTTPS',
+    punycode: 'internationalized domain',
+    manySubdomains: 'many subdomains',
+    hasCredentials: 'contains username or password',
+    score: 'Score',
+    headerEmpty: 'Paste full email headers to inspect common authentication fields.',
+    headerMissingAuth: 'No SPF, DKIM or DMARC result found in the pasted text.',
+    veryWeak: 'Educational estimate: very weak against guessing.',
+    medium: 'Educational estimate: moderate, but uniqueness still matters.',
+    strongEstimate: 'Educational estimate: stronger baseline if unique and not exposed.',
+    sms: 'Better than no MFA, but vulnerable to SIM swap and message interception.',
+    app: 'Good baseline for many users; store backup codes separately.',
+    passkey: 'Phishing-resistant when supported, with recovery planning required.',
+    key: 'Very strong for high-value accounts, but keep a spare key.',
+  },
+  es: {
+    securityChecklist: ['Actualizar dispositivos', 'Activar MFA', 'Usar contrasenas unicas', 'Hacer copias de seguridad', 'Revisar permisos de apps', 'Guardar codigos de recuperacion'],
+    privacyChecklist: ['Limitar ubicacion', 'Revisar cookies', 'Desactivar extensiones no usadas', 'Revisar visibilidad social', 'Eliminar cuentas no usadas', 'Revisar archivos compartidos'],
+    evaluatorItems: ['MFA en el correo', 'Bloqueo del dispositivo', 'Copias de seguridad', 'Gestor de contrasenas', 'Navegador actualizado'],
+    authOptions: { sms: 'Codigo SMS', app: 'App autenticadora', passkey: 'Passkey', key: 'Llave de seguridad' },
+    complete: 'completo',
+    of: 'de',
+    weak: 'Debil: usa una contrasena unica mas larga.',
+    moderate: 'Media: agrega longitud y variedad.',
+    strong: 'Base fuerte: mantenla unica y guardada con seguridad.',
+    bits: 'bits estimados',
+    noQuery: 'ninguna',
+    noWarnings: 'ninguna obvia',
+    invalidUrl: 'No es una URL absoluta valida.',
+    notHttps: 'no usa HTTPS',
+    punycode: 'dominio internacionalizado',
+    manySubdomains: 'muchos subdominios',
+    hasCredentials: 'contiene usuario o contrasena',
+    score: 'Puntuacion',
+    headerEmpty: 'Pega cabeceras completas para revisar campos de autenticacion comunes.',
+    headerMissingAuth: 'No se encontro SPF, DKIM ni DMARC en el texto pegado.',
+    veryWeak: 'Estimacion educativa: muy debil frente a intentos de adivinacion.',
+    medium: 'Estimacion educativa: moderada, pero la unicidad sigue importando.',
+    strongEstimate: 'Estimacion educativa: base mas fuerte si es unica y no esta expuesta.',
+    sms: 'Mejor que no usar MFA, pero vulnerable a SIM swap e interceptacion.',
+    app: 'Buena base para muchas personas; guarda codigos de respaldo aparte.',
+    passkey: 'Resistente al phishing cuando esta disponible, con plan de recuperacion.',
+    key: 'Muy fuerte para cuentas importantes; conviene tener una llave de repuesto.',
+  },
+  fr: {
+    securityChecklist: ['Mettre a jour les appareils', 'Activer MFA', 'Mots de passe uniques', 'Sauvegarder les fichiers', 'Verifier les permissions', 'Stocker les codes de secours'],
+    privacyChecklist: ['Limiter la localisation', 'Verifier les cookies', 'Desactiver les extensions inutiles', 'Verifier la visibilite sociale', 'Supprimer les comptes inutiles', 'Verifier le partage cloud'],
+    evaluatorItems: ['MFA sur e-mail', 'Verrouillage appareil', 'Sauvegardes', 'Gestionnaire de mots de passe', 'Navigateur a jour'],
+    authOptions: { sms: 'Code SMS', app: 'Application authenticator', passkey: 'Passkey', key: 'Cle de securite' },
+  },
+  de: {
+    securityChecklist: ['Gerate aktualisieren', 'MFA aktivieren', 'Einzigartige Passworter', 'Dateien sichern', 'App-Berechtigungen prufen', 'Wiederherstellungscodes speichern'],
+    privacyChecklist: ['Standortzugriff begrenzen', 'Cookies prufen', 'Ungenutzte Erweiterungen deaktivieren', 'Social-Sichtbarkeit prufen', 'Ungenutzte Konten entfernen', 'Cloud-Freigaben prufen'],
+    evaluatorItems: ['MFA fur E-Mail', 'Geratesperre', 'Backups', 'Passwortmanager', 'Aktualisierter Browser'],
+    authOptions: { sms: 'SMS-Code', app: 'Authenticator-App', passkey: 'Passkey', key: 'Sicherheitsschlussel' },
+  },
+  it: {
+    securityChecklist: ['Aggiorna dispositivi', 'Attiva MFA', 'Password uniche', 'Backup dei file', 'Controlla permessi app', 'Salva codici di recupero'],
+    privacyChecklist: ['Limita posizione', 'Controlla cookie', 'Disattiva estensioni inutili', 'Controlla visibilita social', 'Elimina account inutili', 'Controlla condivisioni cloud'],
+    evaluatorItems: ['MFA sull email', 'Blocco dispositivo', 'Backup', 'Password manager', 'Browser aggiornato'],
+    authOptions: { sms: 'Codice SMS', app: 'App autenticatore', passkey: 'Passkey', key: 'Chiave di sicurezza' },
+  },
+  pt: {
+    securityChecklist: ['Atualizar dispositivos', 'Ativar MFA', 'Palavras-passe unicas', 'Fazer copias de seguranca', 'Rever permissoes de apps', 'Guardar codigos de recuperacao'],
+    privacyChecklist: ['Limitar localizacao', 'Rever cookies', 'Desativar extensoes nao usadas', 'Rever visibilidade social', 'Remover contas nao usadas', 'Rever partilhas cloud'],
+    evaluatorItems: ['MFA no email', 'Bloqueio do dispositivo', 'Copias de seguranca', 'Gestor de palavras-passe', 'Navegador atualizado'],
+    authOptions: { sms: 'Codigo SMS', app: 'App autenticadora', passkey: 'Passkey', key: 'Chave de seguranca' },
+  },
+  nl: {
+    securityChecklist: ['Apparaten bijwerken', 'MFA inschakelen', 'Unieke wachtwoorden', 'Bestanden back-uppen', 'App-machtigingen controleren', 'Herstelcodes bewaren'],
+    privacyChecklist: ['Locatietoegang beperken', 'Cookies controleren', 'Ongebruikte extensies uitzetten', 'Sociale zichtbaarheid controleren', 'Ongebruikte accounts verwijderen', 'Cloud-deling controleren'],
+    evaluatorItems: ['MFA op e-mail', 'Apparaatvergrendeling', 'Back-ups', 'Wachtwoordmanager', 'Bijgewerkte browser'],
+    authOptions: { sms: 'Sms-code', app: 'Authenticator-app', passkey: 'Passkey', key: 'Beveiligingssleutel' },
+  },
+} as const;
+const toolLabels = { ...localToolCopy.en, ...(localToolCopy[lang] ?? {}) };
 ---
 
 <div class="hc-callout mb-6">
   <strong>{c.calloutTitle}</strong> {c.calloutText}
 </div>
 
+<script type="application/json" id={`security-tools-copy-${lang}`} set:html={JSON.stringify(toolLabels)} />
+
 <section class="grid gap-4 lg:grid-cols-3">
-  <div class="hc-card p-5 lg:col-span-2">
+  <div id="password-generator" class="hc-card scroll-mt-24 p-5 lg:col-span-2">
     <h3 class="flex items-center gap-2 text-xl font-black"><Icon name="tabler:key" class="h-6 w-6 text-[var(--hc-accent)]" />{c.passwordGenerator}</h3>
     <div class="mt-4 flex flex-wrap items-center gap-3">
       <label class="text-base hc-muted">{c.length} <input class="hc-input ml-2 inline-block w-24" type="number" min="12" max="64" value="20" data-password-length /></label>
@@ -255,20 +346,20 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
     <output class="mt-4 block min-h-12 rounded p-3 font-mono text-sm" style="background: var(--hc-bg); color: var(--hc-lime)" data-password-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="strength-meter" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.strengthMeter}</h3>
     <input class="hc-input mt-4" type="password" placeholder={c.typeLocally} data-strength-input />
     <div class="mt-4 h-3 rounded" style="background: var(--hc-border)"><div class="h-3 rounded transition-all" style="width: 0%; background: var(--hc-accent)" data-strength-bar></div></div>
     <p class="mt-3 text-base hc-muted" data-strength-text>{c.nothingSent}</p>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="passphrase-generator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.passphraseGenerator}</h3>
     <button class="hc-button mt-4" type="button" data-generate-passphrase>{c.generatePhrase}</button>
     <output class="mt-4 block min-h-12 rounded p-3 font-mono text-sm" style="background: var(--hc-bg); color: var(--hc-lime)" data-passphrase-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="entropy-calculator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.entropyCalculator}</h3>
     <input class="hc-input mt-4" type="number" min="1" max="128" value="16" data-entropy-length />
     <label class="mt-3 flex items-center gap-2 hc-muted"><input type="checkbox" checked data-entropy-lower /> {c.lower}</label>
@@ -278,75 +369,76 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
     <output class="mt-3 block font-bold text-[var(--hc-accent)]" data-entropy-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="hash-generator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.hashGenerator}</h3>
     <textarea class="hc-input mt-4 min-h-24" data-hash-input placeholder={c.nonSensitiveText}></textarea>
     <button class="hc-button mt-3" type="button" data-hash-button>SHA-256</button>
     <output class="mt-3 block break-all font-mono text-sm hc-muted" data-hash-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="uuid-generator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.uuidCodes}</h3>
+    <span id="random-code-generator" class="block scroll-mt-24"></span>
     <button class="hc-button mt-4" type="button" data-uuid-button>{c.generateUuid}</button>
     <button class="hc-button hc-button-secondary mt-4" type="button" data-code-button>{c.generateCodes}</button>
     <output class="mt-3 block whitespace-pre-wrap font-mono text-sm hc-muted" data-random-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="security-checklist" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.securityChecklist}</h3>
     <ul class="mt-4 space-y-3">
-      {securityChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-checklist-item />{item}</label></li>)}
+      {toolLabels.securityChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-checklist-item />{item}</label></li>)}
     </ul>
-    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-checklist-score>0 of {securityChecklist.length} complete</p>
+    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-checklist-score>0 {toolLabels.of} {toolLabels.securityChecklist.length} {toolLabels.complete}</p>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="privacy-checklist" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.privacyChecklist}</h3>
     <ul class="mt-4 space-y-3">
-      {privacyChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-privacy-item />{item}</label></li>)}
+      {toolLabels.privacyChecklist.map((item) => <li><label class="flex items-center gap-3 hc-muted"><input class="accent-[var(--hc-accent)]" type="checkbox" data-privacy-item />{item}</label></li>)}
     </ul>
-    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-privacy-score>0 of {privacyChecklist.length} complete</p>
+    <p class="mt-4 font-bold text-[var(--hc-accent)]" data-privacy-score>0 {toolLabels.of} {toolLabels.privacyChecklist.length} {toolLabels.complete}</p>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="url-analyzer" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.urlAnalyzer}</h3>
     <input class="hc-input mt-4" data-url-input placeholder="https://example.com/path?x=1" />
     <output class="mt-3 block whitespace-pre-wrap text-sm hc-muted" data-url-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="email-header-inspector" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.headerInspector}</h3>
     <textarea class="hc-input mt-4 min-h-28" data-header-input placeholder={c.pasteHeaders}></textarea>
     <output class="mt-3 block whitespace-pre-wrap text-sm hc-muted" data-header-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="crack-time-estimator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.crackEstimator}</h3>
     <input class="hc-input mt-4" type="password" data-crack-input placeholder={c.typeLocally} />
     <output class="mt-3 block text-sm hc-muted" data-crack-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="recovery-code-generator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.recoveryCodes}</h3>
     <button class="hc-button mt-4" type="button" data-recovery-button>{c.generatePrintable}</button>
     <output class="mt-3 block whitespace-pre-wrap font-mono text-sm hc-muted" data-recovery-output></output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="personal-security-evaluator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.evaluator}</h3>
-    {['MFA on email', 'Device lock', 'Backups', 'Password manager', 'Updated browser'].map((item) => (
+    {toolLabels.evaluatorItems.map((item) => (
       <label class="mt-3 flex items-center gap-3 hc-muted"><input type="checkbox" data-eval-item />{item}</label>
     ))}
-    <output class="mt-3 block font-bold text-[var(--hc-accent)]" data-eval-output>Score: 0%</output>
+    <output class="mt-3 block font-bold text-[var(--hc-accent)]" data-eval-output>{toolLabels.score}: 0%</output>
   </div>
 
-  <div class="hc-card p-5">
+  <div id="auth-method-comparator" class="hc-card scroll-mt-24 p-5">
     <h3 class="text-xl font-black">{c.comparator}</h3>
     <select class="hc-input mt-4" data-auth-select>
-      <option value="sms">SMS code</option>
-      <option value="app">Authenticator app</option>
-      <option value="passkey">Passkey</option>
-      <option value="key">Security key</option>
+      <option value="sms">{toolLabels.authOptions.sms}</option>
+      <option value="app">{toolLabels.authOptions.app}</option>
+      <option value="passkey">{toolLabels.authOptions.passkey}</option>
+      <option value="key">{toolLabels.authOptions.key}</option>
     </select>
     <output class="mt-3 block text-sm hc-muted" data-auth-output></output>
   </div>
@@ -362,8 +454,9 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
 </section>
 
 <script>
+  const toolCopy = JSON.parse(document.querySelector('script[id^="security-tools-copy-"]')?.textContent || '{}');
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*?';
-  const words = ['anchor', 'signal', 'vault', 'forest', 'orbit', 'silver', 'candle', 'matrix', 'harbor', 'pixel', 'river', 'quiet'];
+  const words = ['anchor', 'signal', 'vault', 'forest', 'orbit', 'silver', 'candle', 'matrix', 'harbor', 'pixel', 'river', 'quiet', 'ember', 'summit', 'garden', 'planet', 'window', 'copper'];
   const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
   const randomBytes = (length) => {
     const bytes = new Uint8Array(length);
@@ -371,12 +464,13 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
     return bytes;
   };
   const code = () => Array.from(randomBytes(4), (byte) => alphabet[byte % alphabet.length]).join('');
+  const text = (key, fallback) => toolCopy[key] || fallback;
 
   const updateChecklist = (selector, output) => {
     const items = Array.from(document.querySelectorAll(selector));
     const done = items.filter((item) => item instanceof HTMLInputElement && item.checked).length;
     const score = document.querySelector(output);
-    if (score) score.textContent = `${done} of ${items.length} complete`;
+    if (score) score.textContent = `${done} ${text('of', 'of')} ${items.length} ${text('complete', 'complete')}`;
   };
 
   const scorePassword = (value) => {
@@ -397,7 +491,7 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
     if (document.querySelector('[data-entropy-digits]')?.checked) pool += 10;
     if (document.querySelector('[data-entropy-symbols]')?.checked) pool += 28;
     const bits = pool ? Math.log2(pool) * length : 0;
-    document.querySelector('[data-entropy-output]').textContent = `${bits.toFixed(1)} bits estimated`;
+    document.querySelector('[data-entropy-output]').textContent = `${bits.toFixed(1)} ${text('bits', 'estimated bits')}`;
   };
 
   const analyzeUrl = () => {
@@ -405,10 +499,32 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
     const out = document.querySelector('[data-url-output]');
     try {
       const url = new URL(value);
-      out.textContent = `Protocol: ${url.protocol}\nHost: ${url.hostname}\nPath: ${url.pathname}\nQuery: ${url.search || 'none'}\nWarning signs: ${url.protocol !== 'https:' ? 'not HTTPS' : 'none obvious'}`;
+      const warnings = [];
+      if (url.protocol !== 'https:') warnings.push(text('notHttps', 'not HTTPS'));
+      if (url.username || url.password) warnings.push(text('hasCredentials', 'contains username or password'));
+      if (url.hostname.includes('xn--')) warnings.push(text('punycode', 'internationalized domain'));
+      if (url.hostname.split('.').length > 4) warnings.push(text('manySubdomains', 'many subdomains'));
+      out.textContent = `Protocol: ${url.protocol}\nHost: ${url.hostname}\nPath: ${url.pathname || '/'}\nQuery: ${url.search || text('noQuery', 'none')}\nWarning signs: ${warnings.length ? warnings.join(', ') : text('noWarnings', 'none obvious')}`;
     } catch {
-      out.textContent = value ? 'Not a valid absolute URL.' : '';
+      out.textContent = value ? text('invalidUrl', 'Not a valid absolute URL.') : '';
     }
+  };
+
+  const inspectHeaders = (value) => {
+    if (!value.trim()) return text('headerEmpty', 'Paste full email headers to inspect common authentication fields.');
+    const lines = value.split('\n').map((line) => line.trim()).filter(Boolean);
+    const wanted = ['from:', 'reply-to:', 'return-path:', 'date:', 'subject:', 'received:', 'authentication-results:', 'received-spf:', 'dkim-signature:', 'spf=', 'dkim=', 'dmarc='];
+    const matches = lines.filter((line) => wanted.some((needle) => line.toLowerCase().includes(needle))).slice(0, 16);
+    const authFound = /spf=|dkim=|dmarc=|authentication-results:/i.test(value);
+    return [...matches, ...(authFound ? [] : [text('headerMissingAuth', 'No SPF, DKIM or DMARC result found in the pasted text.')])].join('\n');
+  };
+
+  const estimateCrack = (value) => {
+    const score = scorePassword(value);
+    if (!value) return '';
+    if (score < 40) return text('veryWeak', 'Educational estimate: very weak against guessing.');
+    if (score < 75) return text('medium', 'Educational estimate: moderate, but uniqueness still matters.');
+    return text('strongEstimate', 'Educational estimate: stronger baseline if unique and not exposed.');
   };
 
   document.addEventListener('click', async (event) => {
@@ -419,7 +535,7 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
       document.querySelector('[data-password-output]').textContent = Array.from({ length }, () => randomItem(alphabet)).join('');
     }
     if (target.closest('[data-generate-passphrase]')) {
-      document.querySelector('[data-passphrase-output]').textContent = Array.from({ length: 5 }, () => randomItem(words)).join('-');
+      document.querySelector('[data-passphrase-output]').textContent = Array.from({ length: 6 }, () => randomItem(words)).join('-');
     }
     if (target.closest('[data-hash-button]')) {
       const text = document.querySelector('[data-hash-input]')?.value || '';
@@ -438,36 +554,29 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
       const score = scorePassword(target.value);
       const bar = document.querySelector('[data-strength-bar]');
       if (bar instanceof HTMLElement) bar.style.width = `${score}%`;
-      document.querySelector('[data-strength-text]').textContent = score < 40 ? 'Weak: use a longer unique password.' : score < 75 ? 'Moderate: add length and variety.' : 'Strong baseline: keep it unique and stored safely.';
+      document.querySelector('[data-strength-text]').textContent = score < 40 ? text('weak', 'Weak: use a longer unique password.') : score < 75 ? text('moderate', 'Moderate: add length and variety.') : text('strong', 'Strong baseline: keep it unique and stored safely.');
     }
     if (target.matches('[data-checklist-item]')) updateChecklist('[data-checklist-item]', '[data-checklist-score]');
     if (target.matches('[data-privacy-item]')) updateChecklist('[data-privacy-item]', '[data-privacy-score]');
     if (target.matches('[data-entropy-length], [data-entropy-lower], [data-entropy-upper], [data-entropy-digits], [data-entropy-symbols]')) entropy();
     if (target.matches('[data-url-input]')) analyzeUrl();
     if (target.matches('[data-header-input]')) {
-      const value = target.value;
-      const interesting = ['from:', 'to:', 'subject:', 'date:', 'received:', 'authentication-results:', 'spf=', 'dkim=', 'dmarc='];
-      document.querySelector('[data-header-output]').textContent = value
-        .split('\\n')
-        .filter((line) => interesting.some((needle) => line.toLowerCase().includes(needle)))
-        .slice(0, 12)
-        .join('\\n');
+      document.querySelector('[data-header-output]').textContent = inspectHeaders(target.value);
     }
     if (target.matches('[data-crack-input]')) {
-      const score = scorePassword(target.value);
-      document.querySelector('[data-crack-output]').textContent = score < 40 ? 'Educational estimate: very weak against guessing.' : score < 75 ? 'Educational estimate: moderate, but uniqueness still matters.' : 'Educational estimate: stronger baseline if unique and not exposed.';
+      document.querySelector('[data-crack-output]').textContent = estimateCrack(target.value);
     }
     if (target.matches('[data-eval-item]')) {
       const items = Array.from(document.querySelectorAll('[data-eval-item]'));
       const done = items.filter((item) => item instanceof HTMLInputElement && item.checked).length;
-      document.querySelector('[data-eval-output]').textContent = `Score: ${Math.round((done / items.length) * 100)}%`;
+      document.querySelector('[data-eval-output]').textContent = `${text('score', 'Score')}: ${Math.round((done / items.length) * 100)}%`;
     }
     if (target.matches('[data-auth-select]')) {
       const map = {
-        sms: 'Better than no MFA, but vulnerable to SIM swap and message interception.',
-        app: 'Good baseline for many users; store backup codes separately.',
-        passkey: 'Phishing-resistant when supported, with recovery planning required.',
-        key: 'Very strong for high-value accounts, but keep a spare key.',
+        sms: text('sms', 'Better than no MFA, but vulnerable to SIM swap and message interception.'),
+        app: text('app', 'Good baseline for many users; store backup codes separately.'),
+        passkey: text('passkey', 'Phishing-resistant when supported, with recovery planning required.'),
+        key: text('key', 'Very strong for high-value accounts, but keep a spare key.'),
       };
       document.querySelector('[data-auth-output]').textContent = map[target.value];
     }
@@ -475,4 +584,7 @@ const privacyChecklist = ['Limit location access', 'Review cookies', 'Disable un
 
   entropy();
   document.querySelector('[data-generate-password]')?.dispatchEvent(new Event('click', { bubbles: true }));
+  document.querySelector('[data-generate-passphrase]')?.dispatchEvent(new Event('click', { bubbles: true }));
+  document.querySelector('[data-auth-output]').textContent = text('sms', 'Better than no MFA, but vulnerable to SIM swap and message interception.');
+  document.querySelector('[data-header-output]').textContent = text('headerEmpty', 'Paste full email headers to inspect common authentication fields.');
 </script>
