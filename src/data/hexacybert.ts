@@ -502,7 +502,19 @@ const newsTopics = [
   ['roboform-import-sharing', 'RoboForm documents sharing and import workflows', 'RoboForm product materials describe import, sync and sharing capabilities.', sourceLibrary.roboform],
 ] as const;
 
-const dateFor = (index: number) => `2026-07-${String((index % 15) + 1).padStart(2, '0')}`;
+const startDate = Date.UTC(2023, 0, 1);
+const latestArticleDate = Date.UTC(2026, 6, 10);
+const dateRangeDays = Math.floor((latestArticleDate - startDate) / 86400000) + 1;
+const formatDate = (timestamp: number) => new Date(timestamp).toISOString().slice(0, 10);
+const hashDateKey = (value: string) =>
+  [...value].reduce((hash, char) => Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0, 2166136261);
+const seededDay = (key: string, salt: number) => hashDateKey(`${salt}:${key}`) % dateRangeDays;
+const dateFor = (key: string) => formatDate(startDate + seededDay(key, 1) * 86400000);
+const updatedFor = (key: string) => {
+  const published = startDate + seededDay(key, 1) * 86400000;
+  const extraDays = seededDay(key, 2) % 240;
+  return formatDate(Math.min(published + extraDays * 86400000, latestArticleDate));
+};
 const minsFor = (title: string) => `${Math.max(5, Math.min(14, Math.round(title.length / 8)))} min read`;
 const levelLabels: Record<Lang, Record<Level, string>> = {
   en: { Beginner: 'Beginner', Intermediate: 'Intermediate', Advanced: 'Advanced' },
@@ -705,8 +717,8 @@ const makeArticle = (
   category,
   type,
   level: level as Level,
-  date: dateFor(index),
-  updated: '2026-07-15',
+  date: dateFor(`${index}:${slug}`),
+  updated: updatedFor(`${index}:${slug}`),
   author: 'HexaCybert Editorial',
   readingTime: minsFor(title),
   tags: [category.replace('-', ' '), type, level.toLowerCase()],
